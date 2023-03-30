@@ -12,9 +12,9 @@ that they can improve their inventory. Story quests will be few but will track t
 As the player completes the first story event, they can be shown the second one and so on. The story events will 
 likely be a combination of both the battle events and the quest events where the player will have to complete some 
 action or duel some enemy. If the player successfully completes the final story event, then they win the game. 
-Players will be able to save and quit the game at any time where the contents of the game will be written to a 
+Players will be able to save and quit the game at any time and the contents of the game will be written to a 
 specific file. When the player runs the game again, it will read that same file to initialize the objects and 
 continue where they left off. The GUI for this will show the players name, their health points, their equipped gear 
-(hopefully with icons), a text area to show the event prompts, a Jtext field to read inputs and a button to submit 
+(hopefully with icons), a text area to show the event prompts, a jtext field to read inputs and a button to submit 
 inputs. If the player enters a battle, there will be a separate window showcasing the enemy’s name, health, and icon
 (hopefully). Additionally, there will be a separate window showcasing the player’s inventory.
