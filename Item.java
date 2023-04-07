@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Item {
     //Item calls Items and assigns the attributes
     //getAttributes throughout Item
@@ -26,7 +28,7 @@ public class Item {
         this.value = value;
         this.strength = strength;
     }
-
+   //load and Item
     //get the weight of Item
     public int getWeight() {
         return weight;
