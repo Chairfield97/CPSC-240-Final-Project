@@ -2,206 +2,142 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Inventory {
-    //this is a monster pushed every scenario for the inventory
-    //in this class
+    private ArrayList<Item> inventory = new ArrayList<>();
+    private int carryLimit;
+    private Item equippedWeapon = null;
+    private Item equippedArmor = null;
+    Scanner scnr = new Scanner(System.in);
+    //int totalWeight = 0;
 
-    private ArrayList<Item> items;
-    private int maxWeight;
-    private Item equippedWeapon;
-    private Item equippedArmor;
+    public Inventory (int carryLimit) {
 
-    //constructor for Inventory
-    public Inventory(int maxWeight) {
-        this.maxWeight = maxWeight;
-        this.equippedWeapon = null;
-        this.equippedArmor = null;
-        items = new ArrayList<>();
+        this.carryLimit = carryLimit;      //initializes carry limit
+        if ( carryLimit >= 90 ) {       //if carry limit is higher than usual
+            System.out.println("You are feeling strong today!\n");
+        }
+        //this.carryLimit = 20;
+        Item startingItem = ItemGenerator.generate();
+
+        while ((equippedWeapon == null) && (equippedArmor == null)) {   // gives player starting weapon and armor
+            if (startingItem.getItemType() == (ItemType.Weapon)) {
+                inventory.add(startingItem);
+                this.equippedWeapon = startingItem;
+            } else if (startingItem.getItemType() == (ItemType.Armor)) {
+                inventory.add(startingItem);
+                this.equippedArmor = startingItem;
+            } else {
+                startingItem = ItemGenerator.generate();
+            }
+        }
     }
+    public boolean add(Item item) {     // can add item to inventory and returns if it did or not
 
-    //tests item weight to maxweight
-    //reveals if it is possible to carry
-    public boolean add(Item item) {
-//        Item item1 = new Item(ItemGenerator.generate());
-        if ((totalWeight() + item.getWeight()) < maxWeight) {
-            //adds Item without constructor...
-//            items.add(ItemGenerator.generate());
+        if ((item.getWeight() + totalWeight()) <= carryLimit) { //if player can carry
+            inventory.add(item);
+            System.out.println("The " + item + " was added to your inventory.");
             return true;
-        } else {
-            System.out.println("This will overburden you." +
-                    " You should drop something.\n");
+        } else {    // if player cannot carry
+            System.out.println("Picking up the " + item + " will exceed your carry limit of " + carryLimit + ".");
             return false;
         }
     }
-
-    //constant run of totalweight
-    public int totalWeight() {
-        int totalWeight = 0;
-        for (Item i : items) {
-            totalWeight = totalWeight + i.getWeight();
+    public int totalWeight() {      //calculates and returns total weight of player inventory
+        int newWeight = 0;
+        for (Item i : inventory) {
+            newWeight += i.getWeight();
         }
-        return totalWeight;
+        return newWeight;
     }
+    public void print() {   //prints out all items in player inventory
 
-    //the meat and potatoes of the class
-    //prints everything on the screen
-    //tried hand at formatting, will have to get better
-    public void print() {
-        Scanner in = new Scanner(System.in);
-        int choice = 0;
+        System.out.printf("%-30s %10s %9s %13s","Item","Weight","Value","Strength\n");
+        for (Item i : inventory) {
+            System.out.printf("%-30s%11s%10s%13s\n",i,i.getWeight(),i.getValue(),i.getStrength());
+        }
+    }
+    public void drop() {    //removes selected item from player inventory
+        System.out.println("\nDrop an item ");
+        System.out.printf("   %-28s %10s %9s %13s","Item","Weight","Value","Strength\n");
+        for (Item i : inventory) {      //prints all items
+            int indexNum = inventory.indexOf(i) + 1;
+            if (indexNum > 9) {     //print format
+                System.out.printf("%d. %-28s%10s%10s%13s\n", indexNum, i, i.getWeight(), i.getValue(), i.getStrength());
+
+            } else {    //print format
+                System.out.printf("%d. %-28s%11s%10s%13s\n", indexNum, i, i.getWeight(), i.getValue(), i.getStrength());
+            }
+        }
+        System.out.println(inventory.size() + 1 + ". Cancel");
+        System.out.print(": ");
+        int choice = scnr.nextInt() - 1;
+        scnr.nextLine();
+        if (inventory.size() == 0) {    //if player inventory is empty
+            System.out.println("No items in inventory.");
+        }
+        else if ( 0 <= choice && choice < inventory.size()) {   //if player makes a valid selection
+            System.out.println("You dropped the " + inventory.get(choice));
+            inventory.remove(choice);
+        } else {    //everything else
+            System.out.println("Drop cancelled");
+        }
+    }
+    public void equipWeapon() {     //equips weapon of players choice from inventory
+
+        ArrayList<Item> weaponSelection = new ArrayList<>();
         int index = 1;
-
-        while (choice != 6) {
-            System.out.println("1. Print inventory\n" +
-                    "2. Add random item\n" +
-                    "3. Drop an item\n" +
-                    "4. Equip Weapon\n" +
-                    "5. Equip armor\n" +
-                    "6. Exit\n");
-            choice = in.nextInt();
-            if (choice == 1) {
-                index = 1;
-                if (items.size() > 0) {
-                    System.out.printf("%20s %10s %10s %10s",
-                            "Item", "Weight", "Value" , "Strength\n");
-                } else {
-                    System.out.println("There is nothing in your"
-                            + " inventory. Try adding something.");
-                }
-                for (Item i : items) {
-                    System.out.printf(index + ": "
-                                    + "%15s %10s %10s %10s\n",
-                            i.getName(), i.getWeight(),
-                            i.getValue(), i.getStrength());
-                    index++;
-                }
-                System.out.println();
-            } else if (choice == 2) {
-                int itemCount = items.size();
-//                System.out.println(ItemGenerator.generate());
-//                Item item1 = new Item();
-                if (add(ItemGenerator.generate()) == true) {
-                    items.add(ItemGenerator.generate());
-                    System.out.println("You added the "
-                            + items.get(itemCount).getName() +
-                            " to your inventory.\n");
-                }
-
-            } else if (choice == 3) {
-                drop();
-            } else if (choice == 4) {
-                equipWeapon();
-            } else if (choice == 5) {
-                equipArmor();
-            } else {
-                break;
+        System.out.println("\nEquip a weapon");
+        System.out.printf("   %-28s %9s %9s %13s","Item","Weight","Value","Strength\n");
+        for (Item i : inventory) {  //prints out all weapons in player inventory
+            if (String.valueOf(i.getItemType()).equals("Weapon")) {
+                weaponSelection.add(i);
+                System.out.printf("%d. %-27s%11s%10s%13s\n",weaponSelection.indexOf(i) + 1,i,i.getWeight(),i.getValue(),i.getStrength());
+                //int inventoryIndex = inventory.indexOf(i);
             }
         }
-    }
-
-    //dropping an item per user input
-    public void drop() {
-//        if (items.size() > 0) {
-//            System.out.println("Drop an item");
-//        } else {
-//            return;
-//        }
-        System.out.println("Drop an item");
-        System.out.printf("%20s %10s %10s %10s",
-                "Item", "Weight", "Value" , "Strength\n");
-        int count = 1;
-        for(Item i : items) {
-            System.out.printf(count + ": "
-                            + "%15s %10s %10s %10s\n",
-                    i.getName(), i.getWeight(),
-                    i.getValue(), i.getStrength());
-            count++;
+        System.out.println(weaponSelection.size() + 1 + ". Cancel");
+        System.out.print(": ");
+        int weaponChoice = scnr.nextInt();
+        if (weaponSelection.size() == 0) {      //if no weapons in inventory
+            System.out.println("You have no weapons in your inventory.");
         }
-        System.out.println(count + ". Cancel");
-        Scanner in = new Scanner(System.in);
-        int index = in.nextInt();
-        if (index < count) {
-            System.out.println("You dropped the "
-                    + items.get(index-1).getName() + ".\n");
-            items.remove(index - 1);
+        else if (!(weaponChoice == weaponSelection.size() + 1)) {       //if player makes a valid selection
+            equippedWeapon = weaponSelection.get(weaponChoice - 1);
+            System.out.println("You equipped the " + equippedWeapon);
+        } else {        //everything else
 
+            System.out.println("Equip weapon cancelled.");
         }
     }
+    public void equipArmor() {      //equips armor of players choice from inventory
 
-    //equipping weapons from weapon selection
-    public void equipWeapon() {
-
-        ArrayList<Item> weapons = new ArrayList<>();
-//        if (weapons.size() > 0) {
-//            System.out.println("Equip a weapon");
-//        } else {
-//            return;
-//        }
-        System.out.println("Equip a weapon");
-        System.out.printf("%20s %10s %10s %10s",
-                "Item", "Weight", "Value" , "Strength\n");
-        Scanner in = new Scanner(System.in);
-        int count = 1;
-        for(Item w : items) {
-            w.getType();
-            if (w.getType() == ItemType.Weapon) {
-                System.out.printf(count + ": "
-                                + "%15s %10s %10s %10s\n",
-                        w.getName(), w.getWeight(),
-                        w.getValue(), w.getStrength());
-                count++;
-                weapons.add(w);
+        ArrayList<Item> armorSelection = new ArrayList<>();
+        int index = 1;
+        System.out.println("\nEquip armor");
+        System.out.printf("   %-28s %9s %9s %13s","Item","Weight","Value","Strength\n");
+        for (Item i : inventory) {      //prints out all armor in players inventory
+            if (String.valueOf(i.getItemType()).equals("Armor")) {
+                armorSelection.add(i);
+                System.out.printf("%d. %-27s%11s%10s%13s\n",armorSelection.indexOf(i)+1,i,i.getWeight(),i.getValue(),i.getStrength());
+                //int inventoryIndex = inventory.indexOf(i);
             }
-
         }
-        System.out.println((count) + ". Cancel");
-        int selection = in.nextInt();
-        if (weapons.size() == 0) {
-            System.out.println();
-            return;
+        System.out.println(armorSelection.size() + 1 + ". Cancel");
+        System.out.print(": ");
+        int armorChoice = scnr.nextInt();
+        if (armorSelection.size() == 0) {       //if no armor in player inventory
+            System.out.println("You have no armor in your inventory.");
         }
-        if (selection < weapons.size()+1) {
-            this.equippedWeapon = weapons.get(selection-1);
-            System.out.println("You equipped the "
-                    + equippedWeapon.getName() + ".\n");
+        else if (!(armorChoice == armorSelection.size() + 1)) {     //if player makes a valid selection
+            equippedArmor = armorSelection.get(armorChoice - 1);
+            System.out.println("You equipped the " + equippedArmor);
+        } else {    //everything else
+            System.out.println("Equip armor cancelled.");
         }
-
     }
-
-    //equipping armor through armor selection
-    public void equipArmor() {
-        ArrayList<Item> armors = new ArrayList<>();
-//        if (armors.size() > 0) {
-//            System.out.println("Equip an armor");
-//        } else {
-//            return;
-//        }
-        System.out.println("Equip armor");
-        System.out.printf("%20s %10s %10s %10s",
-                "Item", "Weight", "Value" , "Strength\n");
-        Scanner in = new Scanner(System.in);
-        int count = 1;
-        for(Item a : items) {
-            a.getType();
-            if (a.getType() == ItemType.Armor) {
-                System.out.printf(count + ": "
-                                + "%15s %10s %10s %10s\n",
-                        a.getName(), a.getWeight(),
-                        a.getValue(), a.getStrength());
-                count++;
-                armors.add(a);
-            }
-
-        }
-        System.out.println((count) + ". Cancel");
-        int selection = in.nextInt();
-        if (armors.size() == 0) {
-            System.out.println();
-            return;
-        }
-        if (selection < armors.size()+1) {
-            this.equippedArmor = armors.get(selection-1);
-            System.out.println("You equipped the "
-                    + equippedArmor.getName() + ".\n");
-        }
+    public Item getEquippedWeapon() {
+        return equippedWeapon;
+    }
+    public Item getEquippedArmor() {
+        return equippedArmor;
     }
 }

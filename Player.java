@@ -8,7 +8,7 @@ public class Player {
         Player.name = name;
         vitality = 50;
     }
-    public static synchronized Player instance(Scanner nameInput){
+    public static synchronized Player instance(Scanner nameInput) {
         if (theInstance == null) {
             System.out.print("Enter the name of your character: ");
             String playName = nameInput.nextLine();

@@ -1,61 +1,43 @@
-import java.util.Scanner;
-
 public class Item {
-    //Item calls Items and assigns the attributes
-    //getAttributes throughout Item
-
-    //class attributes
-    private ItemType type;
+    private ItemType itemType;
     private String name;
     private int weight;
     private int value;
     private int strength;
 
-    //Item constructor to initiate a default Item
-    public Item() {
-        type = ItemType.Weapon;
-        name = "Nothing";
-        weight = 30;
-        value = 0;
-        strength = 0;
-    }
-
-    //constructor to initialize all the variables
-    public Item(ItemType type, String name, int weight, int value, int strength) {
-        this.type = type;
+    public Item (ItemType itemType, String name, int weight, int value, int strength) { //constructs individual items
+        this.itemType = itemType;
         this.name = name;
         this.weight = weight;
         this.value = value;
         this.strength = strength;
     }
-   //load and Item
-    //get the weight of Item
-    public int getWeight() {
-        return weight;
-    }
 
-    //get the value of Item
-    public int getValue() {
-        return value;
-    }
-
-    //get the name of Item
     public String getName() {
         return name;
     }
-
-    //get the type of the Item
-    public ItemType getType() {
-        return type;
+    public ItemType getItemType() {     //returns item type
+        return itemType;
+    }
+    public int getWeight() {        //returns item weight
+        return weight;
     }
 
-    public int getStrength() {
+    public int getValue() {     //returns item value
+        return value;
+    }
+
+    public int getStrength() {      //returns item strength
         return strength;
     }
 
-    //print in a nice format.. will have to format it a little better
-    public String toString() {
-        return type+" "+name+" "+weight+" "+value+" "+strength;
-    }
+    @Override
+    public String toString() {      //returns string value of item properties
 
+        String itemName = String.valueOf(name);
+        String itemWeight = String.valueOf(weight);
+        String itemValue = String.valueOf(value);
+        String itemStrength = String.valueOf(strength);
+        return itemName;
+    }
 }
