@@ -18,13 +18,13 @@ public class Inventory {
         //this.carryLimit = 20;
         Item startingItem = ItemGenerator.generate();
 
-        while ((equippedWeapon == null) && (equippedArmor == null)) {   // gives player starting weapon and armor
+        while (equippedWeapon == null && equippedArmor == null) {   // gives player starting weapon and armor
             if (startingItem.getItemType() == (ItemType.Weapon)) {
                 inventory.add(startingItem);
-                this.equippedWeapon = startingItem;
+                equippedWeapon = startingItem;
             } else if (startingItem.getItemType() == (ItemType.Armor)) {
                 inventory.add(startingItem);
-                this.equippedArmor = startingItem;
+                equippedArmor = startingItem;
             } else {
                 startingItem = ItemGenerator.generate();
             }
