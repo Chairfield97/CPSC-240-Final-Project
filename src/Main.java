@@ -11,12 +11,11 @@ public class Main {
         Inventory inventory = new Inventory(carryLimit);
         System.out.print(p.getName() + "\n");
         System.out.print(p.getVitality() + "\n");
-        System.out.println("Starting weapon: " + inventory.getEquippedWeapon());
+        System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
         System.out.println("Starting Armor: " + inventory.getEquippedArmor());
         for ( int i = 0; i < 5; i++) {
             inventory.add(ItemGenerator.generate());
         }
         inventory.print();
     }
-
 }

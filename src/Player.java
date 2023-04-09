@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Player {
+    // singleton
     private static String name;
     private static int vitality;
     private static Player theInstance;

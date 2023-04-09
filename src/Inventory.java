@@ -25,9 +25,8 @@ public class Inventory {
             } else if (startingItem.getItemType() == (ItemType.Armor)) {
                 inventory.add(startingItem);
                 equippedArmor = startingItem;
-            } else {
-                startingItem = ItemGenerator.generate();
             }
+            startingItem = ItemGenerator.generate();
         }
     }
     public boolean add(Item item) {     // can add item to inventory and returns if it did or not
