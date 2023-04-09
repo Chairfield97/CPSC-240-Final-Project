@@ -1,7 +1,7 @@
 public class Boar implements Enemy {
 
-    super(type) = "Bustling Boar";
-    int vitality = 30;
+    private String type = "Bustling Boar";
+    private int vitality = 30;
     @Override
     public void attack(Player p) {
 
