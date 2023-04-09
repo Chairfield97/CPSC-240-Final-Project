@@ -18,7 +18,7 @@ public class Inventory {
         //this.carryLimit = 20;
         Item startingItem = ItemGenerator.generate();
 
-        while (equippedWeapon == null && equippedArmor == null) {   // gives player starting weapon and armor
+        while (equippedWeapon == null || equippedArmor == null) {   // gives player starting weapon and armor
             if (startingItem.getItemType() == (ItemType.Weapon)) {
                 inventory.add(startingItem);
                 equippedWeapon = startingItem;
