@@ -19,10 +19,10 @@ public class Inventory {
         Item startingItem = ItemGenerator.generate();
 
         while (equippedWeapon == null || equippedArmor == null) {   // gives player starting weapon and armor
-            if (startingItem.getItemType() == (ItemType.Weapon)) {
+            if (startingItem.getItemType() == (ItemType.Weapon) && equippedWeapon == null) {
                 inventory.add(startingItem);
                 equippedWeapon = startingItem;
-            } else if (startingItem.getItemType() == (ItemType.Armor)) {
+            } else if (startingItem.getItemType() == (ItemType.Armor) && equippedArmor == null) {
                 inventory.add(startingItem);
                 equippedArmor = startingItem;
             }

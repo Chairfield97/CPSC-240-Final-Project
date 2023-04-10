@@ -18,17 +18,13 @@ public class Player {
         }
         return theInstance;
     }
-    public int getVitality() {
-        return baseVitality;
+    public int getVitality(Item armor) {
+        return baseVitality + armor.getStrength();
     }
     public String getName() {
         return name;
     }
 
-    public int addProtection(Item armor) {
-        actualVitality = getVitality() + armor.getStrength();
-        return actualVitality;
-    }
 
     public void attack(Enemy e) {
             // will add this in after enemies are created
