@@ -1,6 +1,9 @@
+import java.util.Random;
+
 public interface Enemy {
-    public void attack(Player p);
-    public void specAttack(Player p);
+    public void attack(Player p, Random rng);
+    public void specAttack(Player p, Random rng);
+    public void damage(int dam);
     public void defend();
     public String getType();
     public int getVitality();

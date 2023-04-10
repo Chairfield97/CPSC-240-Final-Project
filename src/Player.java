@@ -1,14 +1,15 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
     // singleton
     private static String name;
-    private static int baseVitality;
+    private static int vitality;
     private static int actualVitality;
     private static Player theInstance;
     private Player(String name) {
         Player.name = name;
-        baseVitality = 50;
+        vitality = 50;
     }
     public static synchronized Player instance(Scanner nameInput) {
         if (theInstance == null) {
@@ -18,18 +19,26 @@ public class Player {
         }
         return theInstance;
     }
-    public int getVitality(Item armor) {
-        return baseVitality + armor.getStrength();
+    public void addArmor(Item armor) {
+        vitality += armor.getStrength();
+    }
+    public int getVitality() {
+        return vitality;
+    }
+    public void damage(int dam) {
+        vitality -= dam;
     }
     public String getName() {
         return name;
     }
 
 
-    public void attack(Enemy e) {
-            // will add this in after enemies are created
+    public void attack(Enemy e, Item weapon, Random rng) {
+        System.out.println("Standard Attack");
+        e.damage(weapon.getStrength() + rng.nextInt(0,3));
     }
-    public void specAttack(Enemy e) {
-            // will add this in after enemies are created
+    public void specAttack(Enemy e, Item weapon, Random rng) {
+        System.out.println("Special Attack");
+        e.damage(weapon.getStrength() + rng.nextInt(5,10));
     }
 }
