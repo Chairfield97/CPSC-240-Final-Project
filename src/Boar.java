@@ -5,17 +5,27 @@ public class Boar implements Enemy {
     private int vitality = 30;
     @Override
     public void attack(Player p, Random rng) {
-        System.out.println("Tusk Swipe!");
-        p.damage(rng.nextInt(4,8));
+        if (p.damage(rng.nextInt(4,9), rng)) {
+            System.out.println("Tusk Swipe hits!");
+        } else {
+            System.out.println(p.getName() + " dodged the tusk swipe!");
+        }
     }
-
     @Override
     public void specAttack(Player p, Random rng) {
-        System.out.println("Hog Charge!!!");
-        p.damage(rng.nextInt(12,18));
+        if (p.damage(rng.nextInt(12,18),rng)) {
+            System.out.println("Hog Charge hits!!!");
+        } else {
+            System.out.println(p.getName() + " dodged the hog charge!");
+        }
     }
-    public void damage(int dam) {
-        vitality -= dam;
+    public boolean damage(int dam, Random rng) {
+        if (rng.nextInt(0,4) == 1) {
+            vitality -= dam;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
