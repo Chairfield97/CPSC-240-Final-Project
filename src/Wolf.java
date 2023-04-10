@@ -3,7 +3,7 @@ package src;
 import java.util.Random;
 
 public class Wolf implements Enemy{
-    private String type="Howling Wolf";
+    private String type="Ravenous Wolf";
     private int vitality=38;
     @Override
     public void attack(Player p, Random rng) {
