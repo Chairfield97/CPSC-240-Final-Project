@@ -19,7 +19,7 @@ public class Event {
         pw.print(progress+"\n");
         pw.print(prompt+"\n");
         pw.print(reward.getName()+"\n");
-        pw.print(reward.getType()+"\n");
+        pw.print(reward.getItemType()+"\n");
         pw.print(reward.getWeight()+"\n");
         pw.print(reward.getStrength()+"\n");
     }

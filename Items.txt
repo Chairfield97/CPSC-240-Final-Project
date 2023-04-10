@@ -1,0 +1,325 @@
+Weapon
+Rusty Sword
+10
+5
+8
+Weapon
+Broadsword
+14
+15
+16
+Weapon
+Pitchfork
+4
+2
+7
+Weapon
+Longbow
+8
+9
+12
+Weapon
+Battle Axe
+13
+7
+14
+Weapon
+Serrated Sword
+6
+8
+12
+Weapon
+War Hammer
+18
+12
+17
+Weapon
+Spear
+6
+5
+8
+Weapon
+Flail
+11
+9
+13
+Weapon
+Short Sword
+5
+8
+7
+Weapon
+Crossbow
+14
+10
+17
+Weapon
+Crystal Halberd
+11
+7
+12
+Weapon
+Dagger
+3
+5
+7
+Armor
+Cloth Robes
+1
+1
+1
+Armor
+Brushed Bronze Armor
+15
+11
+13
+Armor
+Black Plate Armor
+12
+10
+10
+Armor
+Iron Chain Mail
+15
+8
+11
+Armor
+Academy Armor
+8
+5
+9
+Armor
+Inquisitor Gambeson
+20
+13
+12
+Armor
+Boiled Leather Armor
+10
+6
+8
+Armor
+Runic Armor
+15
+20
+15
+Armor
+Dragon Hide Armor
+16
+17
+18
+Armor
+Dragon Plate Armor
+17
+18
+19
+Armor
+Obsidian Infused Armor
+14
+18
+16
+Armor
+Perfect Diamond Armor
+19
+20
+20
+Armor
+Superior Tetsu Armor
+15
+18
+17
+Armor
+Oxidized Copper Cuirass
+16
+8
+13
+Armor
+Globetrotter Outfit
+8
+5
+7
+Armor
+Fisherman Outfit
+5
+3
+2
+Armor
+Thief Outfit
+2
+3
+4
+Armor
+Rogue Armor
+5
+3
+6
+Armor
+Cloth Tribal Outfit
+3
+1
+3
+Armor
+Iron Plate Armor
+20
+12
+14
+Armor
+Inventor Outfit
+8
+10
+5
+Miscellaneous
+Used Toothbrush
+1
+0
+1
+Miscellaneous
+Backpack
+5
+4
+2
+Miscellaneous
+Bedroll
+3
+4
+1
+Miscellaneous
+Canteen
+2
+3
+1
+Miscellaneous
+Compass
+1
+4
+1
+Miscellaneous
+Flint and Steel
+2
+5
+1
+Miscellaneous
+Rope
+3
+2
+1
+Miscellaneous
+Tent
+7
+8
+1
+Miscellaneous
+Cooking Pot
+4
+2
+1
+Miscellaneous
+Waterskin
+2
+3
+1
+Miscellaneous
+Scribe Glasses
+1
+1
+1
+Miscellaneous
+Book on Alchemy
+3
+4
+1
+Miscellaneous
+Stinky Pair of Socks
+1
+0
+1
+Miscellaneous
+Gnawed Pencil
+1
+1
+1
+Miscellaneous
+Set of Keys
+1
+2
+1
+Miscellaneous
+Tankard
+4
+3
+1
+Miscellaneous
+Jewels
+3
+5
+1
+Miscellaneous
+Shovel
+4
+3
+2
+Miscellaneous
+Bucket
+3
+2
+1
+Miscellaneous
+Clay Pot
+6
+3
+1
+Miscellaneous
+Roll of Paper
+1
+0
+1
+Miscellaneous
+Lantern
+4
+6
+1
+Miscellaneous
+Lute
+3
+7
+1
+Miscellaneous
+Hurdy-Gurdy
+7
+8
+1
+Miscellaneous
+Lump of Coal
+3
+2
+1
+Miscellaneous
+Big Lump of Coal
+6
+3
+1
+Miscellaneous
+Flute
+3
+4
+1
+Miscellaneous
+Drum
+7
+4
+1
+Miscellaneous
+Glass Jar
+5
+1
+1
+Miscellaneous
+Hoe
+3
+2
+1
+Miscellaneous
+Candle
+2
+2
+1
