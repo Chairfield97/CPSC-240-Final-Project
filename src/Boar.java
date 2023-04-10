@@ -19,11 +19,11 @@ public class Boar implements Enemy {
 
     @Override
     public String getType() {
-        return null;
+        return type;
     }
 
     @Override
     public int getVitality() {
-        return 0;
+        return vitality;
     }
 }
