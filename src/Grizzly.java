@@ -1,7 +1,7 @@
 package src;
 import java.util.Random;
 public class Grizzly implements Enemy {
-    private String type="Slicing Grizzly";
+    private String type="Grandiose Grizzly";
     private int vitality=50;
     @Override
     public void attack(Player p, Random rng) {
