@@ -9,12 +9,12 @@ public class EventList {
         return false;
     }
     public boolean load(Scanner filescan){
-        (filescan.next())
+        //(filescan.next());
         return false;
     }
     public boolean add(Event event){
 
-        event= new Event(event.prompt,event.reward);
+        event = new Event(event.prompt,event.reward);
         return false;
     }
 }
