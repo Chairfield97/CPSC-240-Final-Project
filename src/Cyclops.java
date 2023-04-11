@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Random;
 
 public class Cyclops implements Enemy {
@@ -48,7 +49,7 @@ public class Cyclops implements Enemy {
     }
 
     @Override
-    public String Image() {
-        return null;
+    public String Image(JComponent mygamePieace) {
+        JComponent mygamePieace = new JComponent(656, 30);
     }
 }

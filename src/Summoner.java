@@ -1,5 +1,6 @@
 
 
+import javax.swing.*;
 import java.util.Random;
 
 public class Summoner implements Enemy {
@@ -49,7 +50,9 @@ public class Summoner implements Enemy {
     }
 
     @Override
-    public String Image() {
+    public String Image(JComponent myGamePiece) {
         return null;
     }
+
+
 }

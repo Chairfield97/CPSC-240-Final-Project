@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Random;
 
 public class Boar implements Enemy {
@@ -44,7 +45,9 @@ public class Boar implements Enemy {
     }
 
     @Override
-    public String Image() {
+    public String Image(JComponent myGamePiece) {
         return null;
     }
+
+
 }
