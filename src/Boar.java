@@ -45,7 +45,7 @@ public class Boar implements Enemy {
     }
 
     @Override
-    public String Image(JComponent myGamePiece) {
+    public JPanel Image(JPanel myGamePiece) {
         return null;
     }
 

@@ -49,7 +49,8 @@ public class Cyclops implements Enemy {
     }
 
     @Override
-    public String Image(JComponent mygamePieace) {
-        JComponent mygamePieace = new JComponent(656, 30);
+    public JPanel Image(JPanel mygamePieace) {
+         mygamePieace= "Cyclops.png";
+        return mygamePieace;
     }
 }
