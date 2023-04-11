@@ -14,7 +14,7 @@ public class EventList {
     }
     public boolean add(Event event){
 
-        event= new Event(event.prompt,event.reward);
+        event = new Event(event.prompt,event.reward);
         return false;
     }
 }
