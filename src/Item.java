@@ -1,3 +1,5 @@
+package src;
+
 public class Item {
     private ItemType itemType;
     private String name;
