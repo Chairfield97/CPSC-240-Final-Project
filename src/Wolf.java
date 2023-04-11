@@ -45,4 +45,9 @@ public class Wolf implements Enemy{
     public int getVitality() {
         return vitality;
     }
+
+    @Override
+    public String Image() {
+        return null;
+    }
 }

@@ -44,4 +44,9 @@ public class Grizzly implements Enemy {
     public int getVitality() {
         return vitality;
     }
+
+    @Override
+    public String Image() {
+        return null;
+    }
 }

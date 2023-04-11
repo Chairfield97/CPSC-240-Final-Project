@@ -1,6 +1,8 @@
+
+
 import java.util.Random;
 
-public class Summoner implements Enemy{
+public class Summoner implements Enemy {
     private String type="Smug Summoner";
     private int vitality=42;
     @Override
@@ -44,5 +46,10 @@ public class Summoner implements Enemy{
     @Override
     public int getVitality() {
         return vitality;
+    }
+
+    @Override
+    public String Image() {
+        return null;
     }
 }

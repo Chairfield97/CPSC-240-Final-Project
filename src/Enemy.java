@@ -7,4 +7,5 @@ public interface Enemy {
     public void defend();
     public String getType();
     public int getVitality();
+    public String Image();
 }
