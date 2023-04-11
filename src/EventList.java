@@ -9,7 +9,7 @@ public class EventList {
         return false;
     }
     public boolean load(Scanner filescan){
-        (filescan.next())
+        //(filescan.next());
         return false;
     }
     public boolean add(Event event){
