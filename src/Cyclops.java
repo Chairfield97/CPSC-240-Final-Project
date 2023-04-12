@@ -1,4 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Cyclops implements Enemy {
@@ -49,8 +54,33 @@ public class Cyclops implements Enemy {
     }
 
     @Override
-    public JPanel Image(JPanel mygamePieace) {
-         mygamePieace= "Cyclops.png";
-        return mygamePieace;
+    public JPanel Image() {
+        JPanel panel=new JPanel();
+
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("pictures/Cyclops.png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            panel.add(label);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("The Cyclops");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // add the Jpanel to the main window
+        frame.add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
+
+
+        return panel;
+
+
+
     }
 }

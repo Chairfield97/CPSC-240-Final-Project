@@ -51,7 +51,7 @@ public class Boar implements Enemy {
 
     @Override
     public JPanel Image() {
-        //ImageIcon image=new ImageIcon("pictures/Boar.png");
+
         JPanel panel=new JPanel();
 
             BufferedImage image = null;
@@ -65,7 +65,7 @@ public class Boar implements Enemy {
 
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("JPanel Example");
+        JFrame frame = new JFrame("The Boar");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window

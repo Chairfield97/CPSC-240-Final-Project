@@ -8,5 +8,5 @@ public interface Enemy {
     public void defend();
     public String getType();
     public int getVitality();
-    public JPanel Image(JPanel myGamePiece);
+    public JPanel Image();
 }
