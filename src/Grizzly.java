@@ -6,28 +6,32 @@ import java.io.IOException;
 import java.util.Random;
 public class Grizzly implements Enemy {
     private String type="Grandiose Grizzly";
-    private int vitality=50;
+    private int vitality = 50;
     @Override
     public void attack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(5,7), rng)) {
-            System.out.println("Grizzly slice and dice");
+        int damDealt = rng.nextInt(6,12);
+        if (p.damage(damDealt, rng)) {
+            System.out.println(RED + "Paw slice and dice -" + damDealt + "\n");
+            System.out.print(RESET);
         } else {
-            System.out.println(p.getName() + " dodged the slice and dice!");
+            System.out.println(p.getName() + " dodged the slice and dice!\n");
         }
     }
 
     @Override
     public void specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(14,16),rng)) {
-            System.out.println("Unbearable charge!!!");
+        int damDealt = rng.nextInt(13,20);
+        if (p.damage(damDealt,rng)) {
+            System.out.println(RED + "Unbearable charge!!! - " + damDealt + "\n");
+            System.out.print(RESET);
         } else {
-            System.out.println(p.getName() + " dodged Unbearable charge!");
+            System.out.println(p.getName() + " dodged Unbearable charge!\n");
         }
     }
 
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) == 1) {
+        if (rng.nextInt(0,2) == 1) {
             vitality -= dam;
             return true;
         } else {
@@ -36,7 +40,7 @@ public class Grizzly implements Enemy {
     }
 
     @Override
-    public void defend() {
+    public void brawl() {
 
     }
 
@@ -49,34 +53,5 @@ public class Grizzly implements Enemy {
     public int getVitality() {
         return vitality;
     }
-
-    @Override
-    public JPanel Image() {
-        JPanel panel=new JPanel();
-
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new File("pictures/Grizzly.png"));
-            JLabel label = new JLabel(new ImageIcon(image));
-            panel.add(label);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // main window
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("The Bear");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // add the Jpanel to the main window
-        frame.add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-
-
-        return panel;
-    }
-
 
 }

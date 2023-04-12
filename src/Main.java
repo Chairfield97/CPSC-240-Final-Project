@@ -13,28 +13,30 @@ public class Main {
         p.addArmor(inventory.getEquippedArmor());
         System.out.println(p.getName() + ": " + p.getVitality());
         System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
-        System.out.println("Starting Armor: " + inventory.getEquippedArmor());
+        System.out.println("Starting Armor: " + inventory.getEquippedArmor() + "\n");
         //for ( int i = 0; i < 5; i++) {
             //inventory.add(ItemGenerator.generate());
         //}
         //inventory.print();
-        Boar b = new Boar();
-        b.Image();
+        Grizzly g = new Grizzly();
+        g.Image();
+
         do {
-            System.out.println(b.getType() + ": " + b.getVitality());
-            b.attack(p, rng);
-            System.out.print(p.getName() + ": " + p.getVitality() + "\n");
-            p.attack(b, inventory.getEquippedWeapon(), rng);
-            System.out.println(b.getType() + ": " + b.getVitality());
-            b.specAttack(p, rng);
-            System.out.print(p.getName() + ": " + p.getVitality() + "\n");
-            p.specAttack(b, inventory.getEquippedWeapon(), rng);
-            System.out.println(b.getType() + ": " + b.getVitality());
-        } while (p.getVitality() > 0 && b.getVitality() > 0);
-        if (p.getVitality() == 0) {
-            System.out.println(p.getName() + " defeated by " + b.getType());
+            System.out.println(g.getType() + ": " + g.getVitality());
+            g.attack(p, rng);
+            System.out.println(p.getName() + ": " + p.getVitality());
+            p.attack(g, inventory.getEquippedWeapon(), rng);
+            System.out.println(g.getType() + ": " + g.getVitality());
+            g.specAttack(p, rng);
+            System.out.println(p.getName() + ": " + p.getVitality());
+            p.specAttack(g, inventory.getEquippedWeapon(), rng);
+            //System.out.println(g.getType() + ": " + g.getVitality());
+        } while (p.getVitality() > 0 && g.getVitality() > 0);
+
+        if (p.getVitality() <= 0) {
+            System.out.println(p.getName() + " defeated by " + g.getType());
         } else {
-            System.out.println(p.getName() + " defeated the " + b.getType());
+            System.out.println(p.getName() + " defeated the " + g.getType());
         }
     }
 }

@@ -12,21 +12,21 @@ public class Boar implements Enemy {
     @Override
     public void attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(4,9), rng)) {
-            System.out.println("Tusk Swipe hits!");
+            System.out.println("Tusk Swipe hits!\n");
         } else {
-            System.out.println(p.getName() + " dodged the tusk swipe!");
+            System.out.println(p.getName() + " dodged the tusk swipe!\n");
         }
     }
     @Override
     public void specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(12,18),rng)) {
-            System.out.println("Hog Charge hits!!!");
+        if (p.damage(rng.nextInt(12,18), rng)) {
+            System.out.println(RED + "Hog Charge hits!!!\n");
         } else {
-            System.out.println(p.getName() + " dodged the hog charge!");
+            System.out.println(p.getName() + " dodged the hog charge!\n");
         }
     }
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) == 1) {
+        if (rng.nextInt(0,3) == 1) {
             vitality -= dam;
             return true;
         } else {
@@ -35,7 +35,7 @@ public class Boar implements Enemy {
     }
 
     @Override
-    public void defend() {
+    public void brawl() {
 
     }
 
@@ -48,35 +48,4 @@ public class Boar implements Enemy {
     public int getVitality() {
         return vitality;
     }
-
-    @Override
-    public JPanel Image() {
-
-        JPanel panel=new JPanel();
-
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(new File("pictures/Boar.png"));
-                JLabel label = new JLabel(new ImageIcon(image));
-                panel.add(label);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        // main window
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("The Boar");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // add the Jpanel to the main window
-        frame.add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-
-
-        return panel;
-    }
-
-
 }

@@ -1,8 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
 
+// singleton
 public class Player {
-    // singleton
+    String GREEN = "\033[0;32m";
+    String RESET = "\033[0m";
+    private int damDealt;
     private static String name;
     private static int vitality;
     private static Player theInstance;
@@ -25,7 +28,7 @@ public class Player {
         return vitality;
     }
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) == 1) {
+        if (rng.nextInt(0,3) == 1) {
             vitality -= dam;
             return true;
         } else {
@@ -37,17 +40,21 @@ public class Player {
     }
 
     public void attack(Enemy e, Item weapon, Random rng) {
-        if (e.damage(weapon.getStrength() + rng.nextInt(0,3), rng)) {
-            System.out.println("Standard Attack hits!");
+        damDealt = weapon.getStrength() + rng.nextInt(0,3);
+        if (e.damage(damDealt, rng)) {
+            System.out.println(GREEN + "Standard Attack hits! - " + damDealt);
+            System.out.println(RESET);
         } else {
-            System.out.println("The " + e.getType() + " dodged the standard attack!");
+            System.out.println("The " + e.getType() + " dodged your standard attack!\n");
         }
     }
     public void specAttack(Enemy e, Item weapon, Random rng) {
-        if (e.damage(weapon.getStrength() + rng.nextInt(5,10), rng)) {
-            System.out.println("Special Attack hits!!!");
+        damDealt = weapon.getStrength() + rng.nextInt(5,10);
+        if (e.damage(damDealt, rng)) {
+            System.out.println(GREEN + "Special Attack hits!!! - " + damDealt);
+            System.out.println(RESET);
         } else {
-            System.out.println("The " + e.getType() + " dodged the special attack!");
+            System.out.println("The " + e.getType() + " dodged your special attack!\n");
         }
     }
 }

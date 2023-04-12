@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Summoner implements Enemy {
-    private String type="Smug Summoner";
+    private String type = "Smug Summoner";
     private int vitality=42;
     @Override
     public void attack(Player p, Random rng) {
@@ -39,7 +39,7 @@ public class Summoner implements Enemy {
     }
 
     @Override
-    public void defend() {
+    public void brawl() {
 
     }
 
@@ -52,34 +52,5 @@ public class Summoner implements Enemy {
     public int getVitality() {
         return vitality;
     }
-
-    @Override
-    public JPanel Image() {
-        JPanel panel=new JPanel();
-
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new File("pictures/Summoner.png"));
-            JLabel label = new JLabel(new ImageIcon(image));
-            panel.add(label);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // main window
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("The Summoner");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // add the Jpanel to the main window
-        frame.add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-
-
-        return panel;
-    }
-
 
 }
