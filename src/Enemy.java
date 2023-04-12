@@ -15,7 +15,7 @@ public interface Enemy {
     public void specAttack(Player p, Random rng);
     public boolean damage(int dam, Random rng);
     public default void brawl(){
-        File f=new File("pictures/");
+        File f=new File("pictures");
         Random r=new Random();
         for(int b=0;b< enemy.size();b++) {
             int p = r.nextInt( enemy.size());
