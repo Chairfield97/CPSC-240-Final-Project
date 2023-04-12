@@ -3,13 +3,13 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Event {
-    protected int progress;
+    protected static int progress;
     protected String prompt;
 
     protected Item reward;
     public Event(String prompt, Item reward){
-        this.prompt=prompt;
-        this.reward=reward;
+        this.prompt = prompt;
+        this.reward = reward;
 
     }
     public void prompt(){
@@ -30,8 +30,8 @@ public class Event {
 
     public boolean Load(Scanner file){
 
-         this.progress= Integer.parseInt(file.nextLine());
-         this.prompt=file.nextLine();
+         this.progress = Integer.parseInt(file.nextLine());
+         this.prompt = file.nextLine();
 
          //this.reward=new Item(ItemType.Weapon,String name, );
         return false;

@@ -22,7 +22,7 @@ public class Wolf implements Enemy{
         if (p.damage(rng.nextInt(13,18),rng)) {
             System.out.println("Slash and dash!!!");
         } else {
-            System.out.println(p.getName() + " dodged  Slash and dash!");
+            System.out.println(p.getName() + " dodged Slash and dash!");
         }
     }
 
