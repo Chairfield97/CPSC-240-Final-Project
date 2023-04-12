@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ public class Main {
         //}
         //inventory.print();
         Boar b = new Boar();
+        b.Image();
         do {
             System.out.println(b.getType() + ": " + b.getVitality());
             b.attack(p, rng);

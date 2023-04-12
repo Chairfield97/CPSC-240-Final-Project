@@ -1,5 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
 
 public class Boar implements Enemy {
     private String type = "Bustling Boar";
@@ -45,8 +50,32 @@ public class Boar implements Enemy {
     }
 
     @Override
-    public JPanel Image(JPanel myGamePiece) {
-        return null;
+    public JPanel Image() {
+        //ImageIcon image=new ImageIcon("pictures/Boar.png");
+        JPanel panel=new JPanel();
+
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(new File("pictures/Boar.png"));
+                JLabel label = new JLabel(new ImageIcon(image));
+                panel.add(label);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("JPanel Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // add the Jpanel to the main window
+        frame.add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
+
+
+        return panel;
     }
 
 
