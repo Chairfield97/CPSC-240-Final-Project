@@ -1,15 +1,10 @@
-
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-public class Summoner implements Enemy {
+public class Summoner extends Enemy {
     private String type = "Smug Summoner";
-    private int vitality=42;
+    private int vitality = 42;
+    private final int maxVitality = getVitality();
+
     @Override
     public void attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(3,9), rng)) {
@@ -39,11 +34,6 @@ public class Summoner implements Enemy {
     }
 
     @Override
-    public void brawl() {
-
-    }
-
-    @Override
     public String getType() {
         return type;
     }
@@ -51,6 +41,9 @@ public class Summoner implements Enemy {
     @Override
     public int getVitality() {
         return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
     }
 
 }

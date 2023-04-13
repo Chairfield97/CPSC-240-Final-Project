@@ -6,9 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class Cyclops implements Enemy {
-    private String type="Close minded Cyclops";
+public class Cyclops extends Enemy {
+    private String type = "Close minded Cyclops";
     private int vitality=45;
+    private final int maxVitality = getVitality();
     @Override
     public void attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(2,3), rng)) {
@@ -39,11 +40,6 @@ public class Cyclops implements Enemy {
     }
 
     @Override
-    public void brawl() {
-
-    }
-
-    @Override
     public String getType() {
         return type;
     }
@@ -51,6 +47,9 @@ public class Cyclops implements Enemy {
     @Override
     public int getVitality() {
         return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
     }
 
 }

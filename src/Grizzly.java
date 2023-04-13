@@ -4,9 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-public class Grizzly implements Enemy {
-    private String type="Grandiose Grizzly";
+public class Grizzly extends Enemy {
+    private String type = "Grandiose Grizzly";
     private int vitality = 50;
+    private final int maxVitality = getVitality();
+
     @Override
     public void attack(Player p, Random rng) {
         int damDealt = rng.nextInt(6,12);
@@ -31,17 +33,12 @@ public class Grizzly implements Enemy {
 
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,2) == 1) {
+        if (rng.nextInt(0,4) == 1) {
+            return false;
+        } else {
             vitality -= dam;
             return true;
-        } else {
-            return false;
         }
-    }
-
-    @Override
-    public void brawl() {
-
     }
 
     @Override
@@ -52,6 +49,9 @@ public class Grizzly implements Enemy {
     @Override
     public int getVitality() {
         return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
     }
 
 }
