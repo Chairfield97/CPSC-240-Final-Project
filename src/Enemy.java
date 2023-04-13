@@ -6,15 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public interface Enemy {
+public abstract class Enemy {
     ArrayList <Enemy> enemy = new ArrayList<>();
     String RED = "\u001B[31m";
     String RESET = "\033[0m";
-    String ANSI_WHITE = "\u001B[37m";
-    public void attack(Player p, Random rng);
-    public void specAttack(Player p, Random rng);
-    public boolean damage(int dam, Random rng);
-    public default void brawl(){
+    protected String type;
+    protected int vitality;
+    protected int maxVitality;
+    abstract public void attack(Player p, Random rng);
+    abstract public void specAttack(Player p, Random rng);
+    abstract public boolean damage(int dam, Random rng);
+    public void Generate(){
         File f = new File("pictures");
         Random r = new Random();
         for(int b = 0; b < enemy.size(); b++) {
@@ -24,9 +26,32 @@ public interface Enemy {
             enemy.add(p, temp);
         }
     }
-    public String getType();
-    public int getVitality();
-    public default JPanel Image() {
+    public void brawl(Player p, Random rng) {
+        System.out.println(getType() + ": " + getVitality());
+        if (getVitality() > getMaxVitality()/2) {
+            if (rng.nextInt(0,7) == 1) {
+                specAttack(p, rng);
+            } else {
+                attack(p, rng);
+            }
+        } else {
+            if (rng.nextInt(0,3) == 1) {
+                specAttack(p, rng);
+            } else {
+                attack(p, rng);
+            }
+        }
+    }
+    public String getType() {
+        return type;
+    }
+    public int getVitality() {
+        return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
+    }
+    public JPanel Image() {
 
             JPanel panel=new JPanel();
 

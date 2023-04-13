@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class Wolf implements Enemy{
-    private String type="Ravenous Wolf";
-    private int vitality=38;
+public class Wolf extends Enemy {
+    private String type = "Ravenous Wolf";
+    private int vitality = 38;
+    private final int maxVitality = getVitality();
+
     @Override
     public void attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(6,9), rng)) {
@@ -37,11 +39,6 @@ public class Wolf implements Enemy{
     }
 
     @Override
-    public void brawl() {
-
-    }
-
-    @Override
     public String getType() {
         return type;
     }
@@ -49,6 +46,9 @@ public class Wolf implements Enemy{
     @Override
     public int getVitality() {
         return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
     }
 
 }

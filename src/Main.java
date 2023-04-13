@@ -70,19 +70,14 @@ public class Main{
 
 
         do {
-            System.out.println(g.getType() + ": " + g.getVitality());
-            g.attack(p, rng);
-            System.out.println(p.getName() + ": " + p.getVitality());
-            p.attack(g, inventory.getEquippedWeapon(), rng);
-            System.out.println(g.getType() + ": " + g.getVitality());
-            g.specAttack(p, rng);
-            System.out.println(p.getName() + ": " + p.getVitality());
-            p.specAttack(g, inventory.getEquippedWeapon(), rng);
-            //System.out.println(g.getType() + ": " + g.getVitality());
+            p.brawl(g, inventory.getEquippedWeapon(), rng, playerInput);
+            if (g.getVitality() > 0) {
+                g.brawl(p, rng);
+            }
         } while (p.getVitality() > 0 && g.getVitality() > 0);
 
         if (p.getVitality() <= 0) {
-            System.out.println(p.getName() + " defeated by " + g.getType());
+            System.out.println(p.getName() + " was defeated by " + g.getType());
         } else {
             System.out.println(p.getName() + " defeated the " + g.getType());
         }

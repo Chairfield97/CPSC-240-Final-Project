@@ -1,14 +1,11 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 
-public class Boar implements Enemy {
+public class Boar extends Enemy {
     private String type = "Bustling Boar";
     private int vitality = 30;
+    private final int maxVitality = getVitality();
+
     @Override
     public void attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(4,9), rng)) {
@@ -35,11 +32,6 @@ public class Boar implements Enemy {
     }
 
     @Override
-    public void brawl() {
-
-    }
-
-    @Override
     public String getType() {
         return type;
     }
@@ -47,5 +39,8 @@ public class Boar implements Enemy {
     @Override
     public int getVitality() {
         return vitality;
+    }
+    public int getMaxVitality() {
+        return maxVitality;
     }
 }
