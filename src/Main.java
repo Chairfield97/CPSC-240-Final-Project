@@ -1,8 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         Scanner playerInput = new Scanner(System.in);
         Player p = Player.instance(playerInput);
@@ -13,13 +18,56 @@ public class Main {
         p.addArmor(inventory.getEquippedArmor());
         System.out.println(p.getName() + ": " + p.getVitality());
         System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
+        JPanel panel=new JPanel();
+        panel.setLayout(new BorderLayout());
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("pictures/" + inventory.getEquippedWeapon() + ".png"));
+            JLabel label = new JLabel(new ImageIcon(image));
+            panel.add(label);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("The " + Main.class.getSimpleName());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // add the Jpanel to the main window
+        frame.add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
         System.out.println("Starting Armor: " + inventory.getEquippedArmor() + "\n");
+        JPanel panel1=new JPanel();
+        BufferedImage image1=null;
+
+        try {
+            image1 = ImageIO.read(new File("pictures/" + inventory.getEquippedArmor() + ".png"));
+            JLabel label1 = new JLabel(new ImageIcon(image1));
+            panel1.add(label1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // main window
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame1 = new JFrame("The " + Main.class.getSimpleName());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // add the Jpanel to the main window
+        frame1.add(panel1);
+
+        frame1.pack();
+        frame1.setVisible(true);
         //for ( int i = 0; i < 5; i++) {
             //inventory.add(ItemGenerator.generate());
         //}
         //inventory.print();
         Grizzly g = new Grizzly();
         g.Image();
+
 
         do {
             System.out.println(g.getType() + ": " + g.getVitality());
