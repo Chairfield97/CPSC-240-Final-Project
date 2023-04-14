@@ -46,22 +46,28 @@ public class Player {
     public void attack(Enemy e, Item weapon, Random rng) {
         damDealt = weapon.getStrength() + rng.nextInt(0,3);
         if (e.damage(damDealt, rng)) {
+            e.sleep();
             System.out.println(GREEN + "Standard Attack hits! - " + damDealt);
             System.out.println(RESET);
         } else {
+            e.sleep();
             System.out.println("The " + e.getType() + " dodged your standard attack!\n");
         }
     }
     public void specAttack(Enemy e, Item weapon, Random rng) {
         damDealt = weapon.getStrength() + rng.nextInt(5,10);
         if (e.damage(damDealt, rng)) {
-            System.out.println(GREEN + "Special Attack hits!!! - " + damDealt);
+            e.sleep();
+            System.out.println(BLUE + "Special Attack hits!!! - " + damDealt);
             System.out.println(RESET);
         } else {
+            e.sleep();
             System.out.println("The " + e.getType() + " dodged your special attack!\n");
         }
     }
+
     public void brawl(Enemy e, Item weapon, Random rng, Scanner in) {
+        e.sleep();
         System.out.println(getName() + ": " + getVitality());
         System.out.println("standard (a)ttack, (s)pecial attack or enter to skip");
         attackChoice = in.nextLine();
@@ -75,12 +81,12 @@ public class Player {
             } else {
                 remCooldown = 3 - specCooldown;
                 System.out.println(BLUE + "Special cooldown remaining: " + remCooldown);
-                System.out.println(RESET);
+                System.out.print(RESET);
                 specCooldown++;
-
                 attack(e, weapon, rng);
             }
         } else {
+            e.sleep();
             System.out.println(getName() + " opted to attack the " + e.getType());
             specCooldown++;
         }

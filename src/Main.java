@@ -16,7 +16,8 @@ public class Main{
         p.addArmor(inventory.getEquippedArmor());
         System.out.println(p.getName() + ": " + p.getVitality());
         Battle b = new Battle();
-        b.fight(inventory, p, playerInput, rng);
+        Grizzly g = new Grizzly();
+        b.fight(inventory, p, g, playerInput, rng);
 
     }
 }

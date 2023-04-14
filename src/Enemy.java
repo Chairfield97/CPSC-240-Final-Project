@@ -27,6 +27,7 @@ public abstract class Enemy {
         }
     }
     public void brawl(Player p, Random rng) {
+        sleep();
         System.out.println(getType() + ": " + getVitality());
         if (getVitality() > getMaxVitality()/2) {
             if (rng.nextInt(0,7) == 1) {
@@ -50,6 +51,13 @@ public abstract class Enemy {
     }
     public int getMaxVitality() {
         return maxVitality;
+    }
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // ignore
+        }
     }
     public JPanel Image() {
 

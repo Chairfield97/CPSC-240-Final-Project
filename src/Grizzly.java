@@ -13,9 +13,11 @@ public class Grizzly extends Enemy {
     public void attack(Player p, Random rng) {
         int damDealt = rng.nextInt(6,12);
         if (p.damage(damDealt, rng)) {
+            sleep();
             System.out.println(RED + "Paw slice and dice -" + damDealt + "\n");
             System.out.print(RESET);
         } else {
+            sleep();
             System.out.println(p.getName() + " dodged the slice and dice!\n");
         }
     }
@@ -24,9 +26,11 @@ public class Grizzly extends Enemy {
     public void specAttack(Player p, Random rng) {
         int damDealt = rng.nextInt(13,20);
         if (p.damage(damDealt,rng)) {
+            sleep();
             System.out.println(RED + "Unbearable charge!!! - " + damDealt + "\n");
             System.out.print(RESET);
         } else {
+            sleep();
             System.out.println(p.getName() + " dodged Unbearable charge!\n");
         }
     }

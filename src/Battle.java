@@ -8,7 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Battle {
-    public void fight(Inventory inventory, Player p, Scanner playerInput, Random rng) {
+    public void fight(Inventory inventory, Player p, Enemy enemy, Scanner playerInput, Random rng) {
+        enemy.sleep();
         System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
         JPanel panel=new JPanel();
         panel.setLayout(new BorderLayout());
@@ -25,7 +26,7 @@ public class Battle {
 
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("The " + Main.class.getSimpleName());
+        JFrame frame = new JFrame("Weapon");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
@@ -48,7 +49,7 @@ public class Battle {
 
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame1 = new JFrame("The " + Main.class.getSimpleName());
+        JFrame frame1 = new JFrame("Armor");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
@@ -56,21 +57,23 @@ public class Battle {
 
         frame1.pack();
         frame1.setVisible(true);
-        Grizzly g = new Grizzly();
-        System.out.println("You encountered a " + g.getType() + " " + g.getVitality() + "\n");
-        g.Image();
+        enemy.sleep();
+        System.out.println("You encountered a " + enemy.getType() + " " + enemy.getVitality() + "\n");
+        enemy.Image();
 
         do {
-            p.brawl(g, inventory.getEquippedWeapon(), rng, playerInput);
-            if (g.getVitality() > 0) {
-                g.brawl(p, rng);
+            p.brawl(enemy, inventory.getEquippedWeapon(), rng, playerInput);
+            if (enemy.getVitality() > 0) {
+                enemy.brawl(p, rng);
             }
-        } while (p.getVitality() > 0 && g.getVitality() > 0);
+        } while (p.getVitality() > 0 && enemy.getVitality() > 0);
 
         if (p.getVitality() <= 0) {
-            System.out.println(p.getName() + " was defeated by " + g.getType());
+            enemy.sleep();
+            System.out.println(p.getName() + " was defeated by " + enemy.getType());
         } else {
-            System.out.println(p.getName() + " defeated the " + g.getType());
+            enemy.sleep();
+            System.out.println(p.getName() + " defeated the " + enemy.getType());
         }
     }
 }
