@@ -82,6 +82,7 @@ public class Player {
             }
         } else {
             System.out.println(getName() + " opted to attack the " + e.getType());
+            specCooldown++;
         }
     }
 }

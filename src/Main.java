@@ -22,7 +22,9 @@ public class Main{
         panel.setLayout(new BorderLayout());
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("pictures/" + inventory.getEquippedWeapon() + ".png"));
+            //weapImage = ImageIO.read(new File("pictures/" + inventory.getEquippedWeapon() + ".png"));
+            image = ImageIO.read(new File("pictures/" + "Crystal Halberd" + ".png"));
+
             JLabel label = new JLabel(new ImageIcon(image));
             panel.add(label);
         } catch (IOException e) {
@@ -32,7 +34,7 @@ public class Main{
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame("The " + Main.class.getSimpleName());
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
         frame.add(panel);
@@ -40,11 +42,12 @@ public class Main{
         frame.pack();
         frame.setVisible(true);
         System.out.println("Starting Armor: " + inventory.getEquippedArmor() + "\n");
-        JPanel panel1=new JPanel();
-        BufferedImage image1=null;
+        JPanel panel1 = new JPanel();
+        BufferedImage image1 = null;
 
         try {
-            image1 = ImageIO.read(new File("pictures/" + inventory.getEquippedArmor() + ".png"));
+            //armImage = ImageIO.read(new File("pictures/" + inventory.getEquippedArmor() + ".png"));
+            image1 = ImageIO.read(new File("pictures/" + "Obsidian Infused Armor" + ".png"));
             JLabel label1 = new JLabel(new ImageIcon(image1));
             panel1.add(label1);
         } catch (IOException e) {
@@ -54,7 +57,7 @@ public class Main{
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame1 = new JFrame("The " + Main.class.getSimpleName());
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
         frame1.add(panel1);
