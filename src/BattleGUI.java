@@ -30,6 +30,8 @@ public class BattleGUI implements ActionListener {
         topPanel.setLayout((new GridLayout(1,
                 1,5,5)));
 
+
+
         JTextArea playerStats = new JTextArea(
                 2,10);
         playerStats.setBorder(BorderFactory
