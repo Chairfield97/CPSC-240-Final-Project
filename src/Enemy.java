@@ -59,32 +59,32 @@ public abstract class Enemy {
             // ignore
         }
     }
-    public JPanel Image() {
-
-            JPanel panel=new JPanel();
-
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(new File("pictures/" + getClass().getSimpleName() + ".png"));
-                JLabel label = new JLabel(new ImageIcon(image));
-                panel.add(label);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            // main window
-            JFrame.setDefaultLookAndFeelDecorated(true);
-            JFrame frame = new JFrame("The " + getClass().getSimpleName());
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-            // add the Jpanel to the main window
-            frame.add(panel);
-
-            frame.pack();
-            frame.setVisible(true);
-
-
-            return panel;
-
-    }
+//    public JPanel Image() {
+//
+//            JPanel panel=new JPanel();
+//
+//            BufferedImage image = null;
+//            try {
+//                image = ImageIO.read(new File("pictures/" + getClass().getSimpleName() + ".png"));
+//                JLabel label = new JLabel(new ImageIcon(image));
+//                panel.add(label);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            // main window
+//            JFrame.setDefaultLookAndFeelDecorated(true);
+//            JFrame frame = new JFrame("The " + getClass().getSimpleName());
+//            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//
+//            // add the Jpanel to the main window
+//            frame.add(panel);
+//
+//            frame.pack();
+//            frame.setVisible(true);
+//
+//
+//            return panel;
+//
+//    }
 }

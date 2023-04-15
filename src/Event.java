@@ -17,11 +17,13 @@ public class Event {
     public void prompt(){
         FileInputStream file;
         try{
-            file=new FileInputStream("Events.txt");
+            file = new FileInputStream("Events.txt");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
 
     }
     public void save(PrintWriter pw){
@@ -44,7 +46,7 @@ public class Event {
         try{
             f=new FileInputStream(String.valueOf(file));
             while(file.hasNext()){
-                Event event=new Event(file.nextLine(), this.reward);
+                Event event = new Event(file.nextLine(), this.reward);
                 file.nextLine();
             }
         } catch (FileNotFoundException e) {

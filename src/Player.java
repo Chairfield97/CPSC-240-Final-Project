@@ -69,7 +69,7 @@ public class Player {
     public void brawl(Enemy e, Item weapon, Random rng, Scanner in) {
         e.sleep();
         System.out.println(getName() + ": " + getVitality());
-        System.out.println("standard (a)ttack, (s)pecial attack or enter to skip");
+        System.out.println("Standard (a)ttack, (s)pecial attack or enter to skip");
         attackChoice = in.nextLine();
         if (attackChoice.contains("a")) {
             specCooldown++;

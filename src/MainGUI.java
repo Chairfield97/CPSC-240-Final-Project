@@ -125,9 +125,8 @@ public class MainGUI implements ActionListener {
         });
 
         JButton battle = new JButton("To battle!");
-        battle.addActionListener(new BattleGUI());
-
-
+        Battle b = new Battle();
+        //battle.addActionListener(b.fight());
 
 
         //Scroll bar on side of textBox
