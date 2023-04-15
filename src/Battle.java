@@ -13,12 +13,12 @@ public class Battle {
         System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
         JPanel panel=new JPanel();
         panel.setLayout(new BorderLayout());
-        BufferedImage image;
+        BufferedImage weapImage;
         try {
-            //weapImage = ImageIO.read(new File("pictures/" + inventory.getEquippedWeapon() + ".png"));
-            image = ImageIO.read(new File("pictures/" + "Crystal Halberd" + ".png"));
+            weapImage = ImageIO.read(new File("pictures/" + inventory.getEquippedWeapon() + ".png"));
+            //image = ImageIO.read(new File("pictures/" + "Crystal Halberd" + ".png"));
 
-            JLabel label = new JLabel(new ImageIcon(image));
+            JLabel label = new JLabel(new ImageIcon(weapImage));
             panel.add(label);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -26,37 +26,37 @@ public class Battle {
 
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("Weapon");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame weapFrame = new JFrame("Weapon");
+        weapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
-        frame.add(panel);
+        weapFrame.add(panel);
 
-        frame.pack();
-        frame.setVisible(true);
+        weapFrame.pack();
+        weapFrame.setVisible(true);
         System.out.println("Starting Armor: " + inventory.getEquippedArmor() + "\n");
-        JPanel panel1 = new JPanel();
-        BufferedImage image1;
+        JPanel armPanel = new JPanel();
+        BufferedImage armImage;
 
         try {
-            //armImage = ImageIO.read(new File("pictures/" + inventory.getEquippedArmor() + ".png"));
-            image1 = ImageIO.read(new File("pictures/" + "Obsidian Infused Armor" + ".png"));
-            JLabel label1 = new JLabel(new ImageIcon(image1));
-            panel1.add(label1);
+            armImage = ImageIO.read(new File("pictures/" + inventory.getEquippedArmor() + ".png"));
+            //armImage = ImageIO.read(new File("pictures/" + "Obsidian Infused Armor" + ".png"));
+            JLabel armLabel = new JLabel(new ImageIcon(armImage));
+            armPanel.add(armLabel);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // main window
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame1 = new JFrame("Armor");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame armFrame = new JFrame("Armor");
+        weapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the Jpanel to the main window
-        frame1.add(panel1);
+        armFrame.add(armPanel);
 
-        frame1.pack();
-        frame1.setVisible(true);
+        armFrame.pack();
+        armFrame.setVisible(true);
         enemy.sleep();
         System.out.println("You encountered a " + enemy.getType() + " " + enemy.getVitality() + "\n");
         enemy.Image();
