@@ -15,6 +15,13 @@ public class Event {
 
     }
     public void prompt(){
+        FileInputStream file;
+        try{
+            file=new FileInputStream("Events.txt");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
     public void save(PrintWriter pw){
