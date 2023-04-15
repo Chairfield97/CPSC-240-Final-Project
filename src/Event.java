@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -29,17 +31,24 @@ public class Event {
     }
 
     public boolean Load(Scanner file){
-
-         this.progress = Integer.parseInt(file.nextLine());
-         this.prompt = file.nextLine();
-
-         //this.reward=new Item(ItemType.Weapon,String name, );
-        return false;
+        FileInputStream f;
+        this.progress = Integer.parseInt(file.nextLine());
+        this.prompt = file.nextLine();
+        try{
+            f=new FileInputStream(String.valueOf(file));
+            while(file.hasNext()){
+                Event event=new Event(file.nextLine(), this.reward);
+                file.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return Boolean.parseBoolean(prompt);
     }
 
     @Override
     public String toString() {
-
-        return null;
+        String quest= this.prompt;
+        return prompt;
     }
 }
