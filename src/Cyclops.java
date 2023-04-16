@@ -13,9 +13,9 @@ public class Cyclops extends Enemy {
     @Override
     public String attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(2,3), rng)) {
-            return("Clubbin time hit");
+            return("Clubbin time hit"+"\n");
         } else {
-            return(p.getName() + " dodged the Clubbin time!");
+            return(p.getName() + " dodged the Clubbin time!"+"\n");
         }
     }
 
@@ -23,9 +23,9 @@ public class Cyclops extends Enemy {
     @Override
     public String specAttack(Player p, Random rng) {
         if (p.damage(rng.nextInt(20,22),rng)) {
-            return("punch and kick hits!!!");
+            return("punch and kick hits!!!"+"\n");
         } else {
-            return(p.getName() + " dodged punch and kick!");
+            return(p.getName() + " dodged punch and kick!"+"\n");
         }
     }
 
