@@ -184,18 +184,19 @@ class BattleGUI {
 //        StyleConstants.setForeground(promptStyle, Color.black);
         String attack = player.attack(enemy, inventory.getEquippedWeapon(), rng);
         if ( attack.contains("hit")) {
-            enemy.sleep();
+            sleep();
             appendToPane(prompt, attack, Color.green);
         } else {
+            sleep();
             appendToPane(prompt, attack, Color.black);
         }
         if (enemy.getVitality() > 0) {
             String enemAttack = enemy.brawl(player, rng);
             if (!enemAttack.contains("hit")) {
-                enemy.sleep();
+                sleep();
                 appendToPane(prompt, enemAttack, Color.black);
             } else {
-                enemy.sleep();
+                sleep();
                 appendToPane(prompt, enemAttack, Color.red);
             }
         }
@@ -208,7 +209,7 @@ class BattleGUI {
         //System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.BLACK);
         String attack = player.specAttack(enemy, inventory.getEquippedWeapon(), rng);
-        enemy.sleep();
+        sleep();
         if (attack.contains("Special")) {
             appendToPane(prompt, attack, Color.BLUE);
         } else if (attack.contains("Standard")) {
@@ -218,7 +219,7 @@ class BattleGUI {
             appendToPane(prompt, attack, Color.BLACK);
         }
         if (enemy.getVitality() > 0) {
-            enemy.sleep();
+            sleep();
             String enemSpec = enemy.brawl(player, rng);
             if (!enemSpec.contains("hit")) {
                 appendToPane(prompt, enemy.brawl(player, rng), Color.BLACK);
@@ -260,17 +261,24 @@ class BattleGUI {
         vitalitylbl.setVisible(true);
         speciallbl.setVisible(true);
         if (player.getVitality() <= 0) {
-            enemy.sleep();
             appendToPane(prompt,player.getName() + " was defeated by " + enemy.getType(), Color.red);
-//            enemy.sleep();
-//            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
-//            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+
+            sleep();
+            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
         } else if (enemy.getVitality() <= 0) {
-            enemy.sleep();
+
             appendToPane(prompt,player.getName() + " defeated the " + enemy.getType(), Color.green);
-//            enemy.sleep();
-//            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
-//            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+            sleep();
+            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+        }
+    }
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // ignore
         }
     }
 }

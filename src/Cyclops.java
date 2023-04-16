@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Cyclops extends Enemy {
-    private String type = "Close minded Cyclops";
+    private String type = "Close-Minded Cyclops";
     private int vitality=45;
     private final int maxVitality = getVitality();
     @Override

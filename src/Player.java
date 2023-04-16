@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
 
+
 // singleton
 public class Player {
     String BLUE = "\u001B[34m";
@@ -19,11 +20,11 @@ public class Player {
         Player.name = name;
         vitality = 50;
     }
-    public static synchronized Player instance(Scanner nameInput) {
+    public static synchronized Player instance() {
+//        Scanner nameInput = new Scanner(System.in);
         if (theInstance == null) {
-            System.out.print("Enter the name of your character: ");
-            String playName = nameInput.nextLine();
-            theInstance = new Player(playName);
+            String nameInput = JOptionPane.showInputDialog("What is your name?");
+            theInstance = new Player(nameInput);
         }
         return theInstance;
     }
