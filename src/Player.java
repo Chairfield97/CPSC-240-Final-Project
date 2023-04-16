@@ -23,15 +23,17 @@ public class Player {
     public static synchronized Player instance() {
 //        Scanner nameInput = new Scanner(System.in);
         if (theInstance == null) {
-            String nameInput = JOptionPane.showInputDialog("What is your name?");
+            String nameInput = JOptionPane.showInputDialog("What is your name traveler?");
             theInstance = new Player(nameInput);
         }
         return theInstance;
     }
-    public void addArmor(Item armor) {
-        vitality += armor.getStrength();
+    public int addArmor(Item armor) {
+        vitality = 50;
+        return vitality += armor.getStrength();
     }
     public int getVitality() {
+
         return vitality;
     }
     public boolean damage(int dam, Random rng) {
@@ -51,7 +53,7 @@ public class Player {
         specCooldown++;
         if (e.damage(damDealt, rng)) {
 
-            return("Standard Attack hits! - " + damDealt + "\n");
+            return("Standard Attack hits! -" + damDealt + "\n");
             //System.out.println(RESET);
         } else {
 
@@ -65,7 +67,7 @@ public class Player {
             if (e.damage(damDealt, rng)) {
 
                 //System.out.println(RESET);
-                return ("Special Attack hits!!! - " + damDealt + "\n");
+                return ("Special Attack hits!!! -" + damDealt + "\n");
             } else {
 
                 return ("The " + e.getType() + " dodged your special attack!\n");

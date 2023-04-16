@@ -8,11 +8,13 @@ public class Battle {
     private Player player;
     private Inventory inventory;
     private Random rng;
-    EventList event = new EventList();
-    ArrayList<Enemy> enemies = event.enemies();
+    EventList eventList = new EventList();
+
 
     public Battle(Inventory inventory, Player player, Random rng) {
-        this.enemy = enemies.remove(rng.nextInt(0, enemies.size()));
+        eventList.enemySpawn();
+        int numEnemies = eventList.getNumEnemies();
+        this.enemy = (Enemy) eventList.enemySpawn().remove(rng.nextInt(0, numEnemies));
         this.player= player;
         this.inventory = inventory;
         this.rng = rng;

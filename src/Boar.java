@@ -25,7 +25,7 @@ public class Boar extends Enemy {
         }
     }
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,3) == 1) {
+        if (rng.nextInt(0,3) != 1) {
             vitality -= dam;
             return true;
         } else {

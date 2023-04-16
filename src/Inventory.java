@@ -13,7 +13,7 @@ public class Inventory {
 
         this.carryLimit = carryLimit;      //initializes carry limit
         if ( carryLimit >= 90 ) {       //if carry limit is higher than usual
-            System.out.println("You are feeling strong today!\n");
+            System.out.println("You are feeling strong today!");
         }
         //this.carryLimit = 20;
         Item startingItem = ItemGenerator.generate();

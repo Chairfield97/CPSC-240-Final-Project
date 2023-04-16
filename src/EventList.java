@@ -9,18 +9,21 @@ public class EventList {
     private ArrayList<Event>events = new ArrayList<>();
     private int progress;
 
-    public ArrayList enemies() {
+    public ArrayList enemySpawn() {
         enemies.add(new Summoner());
         enemies.add(new Boar());
         enemies.add(new Wolf());
         enemies.add(new Cyclops());
         enemies.add(new Grizzly());
-        Collections.shuffle(enemies);
+        //Collections.shuffle(enemies);
         return enemies;
     }
     public boolean save(PrintWriter pw){
         pw.print(events);
         return false;
+    }
+    public int getNumEnemies() {
+        return enemies.size();
     }
     public boolean load(Scanner filescan){
         //(filescan.next());

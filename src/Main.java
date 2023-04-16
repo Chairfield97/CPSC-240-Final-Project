@@ -9,14 +9,19 @@ public class Main{
     public static void main(String[] args) {
 
         Player p = Player.instance();
-        ItemGenerator.itemSelection("Items.txt"); //passes import file to be imported
+        ItemGenerator.itemSelection("Items.txt");    //passes import file to be imported
         Random rng = new Random();
-        int carryLimit = rng.nextInt(69,110); //generates random carry limit
+        int carryLimit = rng.nextInt(69,110);   //generates random carry limit
         Inventory inventory = new Inventory(carryLimit);    //passes carry limit to inventory
         Scanner input = new Scanner(System.in);
         boolean prompt = true;
         int userSelection;
         while (prompt) {    //while player does not select exit
+
+            System.out.println("\n" + p.getName());
+            System.out.println("Vitality: " + p.addArmor(inventory.getEquippedArmor()));
+            System.out.println("Carry Capacity : " + inventory.totalWeight() + "/" + carryLimit);
+            System.out.println(" \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon());
             System.out.println("-------------------------");
             System.out.println("1. Battle");
             System.out.println("2. Print Inventory");
@@ -29,11 +34,10 @@ public class Main{
 
 
             userSelection = input.nextInt();    //scans users input
-
+            System.out.println();
             switch (userSelection) {
                 case 1:
                     new Battle(inventory, p, rng);
-                    System.out.println(p.getName() + ": " + p.getVitality());
                     break;
                 case 2:     //print inventory choice
                     inventory.print();

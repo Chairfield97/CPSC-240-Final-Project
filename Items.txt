@@ -12,7 +12,7 @@ Weapon
 Pitchfork
 4
 2
-7
+5
 Weapon
 Longbow
 8
