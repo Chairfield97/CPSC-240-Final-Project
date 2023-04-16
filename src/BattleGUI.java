@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Random;
+import java.util.Scanner;
 import javax.swing.text.*;
 
 class BattleGUI {
@@ -20,30 +22,40 @@ class BattleGUI {
     private JLabel namelbl = new JLabel();
     private JLabel vitalitylbl = new JLabel();
     private JLabel powerlbl = new JLabel();
+    private JLabel speciallbl = new JLabel();
+    private JLabel enemylbl = new JLabel();
+    private JLabel enemyVitlbl = new JLabel();
     PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
     PrintStream stdout = System.out;
     Style promptStyle = prompt.addStyle("Style", null);
     JScrollPane promptScroll;
-    Inventory inventory;
-    Enemy enemy;
+    private Inventory inventory;
+    private Enemy enemy;
+    private Player player;
+    private Random rng;
 
 
 
-    public BattleGUI(Inventory inventory, Player player, Enemy enemy){
+    public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng){
         frame.setTitle("Battle");
         frame.setSize(800,900);
         frame.setLocation(new Point(300,200));
         frame.setLayout(null);
         frame.setResizable(false);
         this.inventory = inventory;
+        this.player = player;
         this.enemy = enemy;
+        this.rng = rng;
         initComponent(inventory, player, enemy);
         initEvent();
     }
 
     private void initComponent(Inventory inventory, Player player, Enemy enemy) {
 
+        enemylbl.setText(enemy.getType());
+        enemyVitlbl.setText("Vitality: " + (enemy.getMaxVitality()));
         namelbl.setText(player.getName());
+        speciallbl.setText("Special Cooldown: " + player.getSpecCooldown());
         player.addArmor(inventory.getEquippedArmor());
         vitalitylbl.setText("Vitality: " + player.getVitality());
         powerlbl.setText("Power: " + inventory.getEquippedWeapon().getStrength());
@@ -84,6 +96,10 @@ class BattleGUI {
         namelbl.setBounds(20, 425, 100, 20);
         vitalitylbl.setBounds(20, 445, 100, 20);
         powerlbl.setBounds(20, 465, 100, 20);
+        speciallbl.setBounds(20, 485, 200, 20);
+
+        enemylbl.setBounds(680,425,100,20);
+        enemyVitlbl.setBounds(680,445,100,20);
 
         // Input ALT+A or ALT+S
         btnAttack.setMnemonic(KeyEvent.VK_A);
@@ -103,8 +119,11 @@ class BattleGUI {
         frame.add(namelbl);
         frame.add(vitalitylbl);
         frame.add(powerlbl);
+        frame.add(speciallbl);
+        frame.add(enemylbl);
+        frame.add(enemyVitlbl);
+        appendToPane(prompt, ("You encountered a " + enemy.getType() + "!\n"), Color.black);
         frame.setVisible(true);
-
     }
 
     private void initEvent(){
@@ -112,7 +131,7 @@ class BattleGUI {
         frame.addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent e){
-                System.exit(1);
+                frame.dispose();
             }
         });
 
@@ -133,40 +152,55 @@ class BattleGUI {
 
     private void btnAttackClick(){
         System.setOut(promptOutput);
-        StyleConstants.setForeground(promptStyle, Color.green);
-        String attack =  ("Standard attack\n");
-        appendToPane(prompt, attack, Color.green);
-
-//        try {
-//            sPrompt.insertString(sPrompt.getLength(), attack, promptStyle);
-//            System.out.println();
-//
-//        } catch (BadLocationException e) {
-//            e.printStackTrace();
-//        }
-        //prompt.setText("Standard attack!");
-        //prompt.setVisible(true);
+        StyleConstants.setForeground(promptStyle, Color.black);
+        String attack = player.attack(enemy, inventory.getEquippedWeapon(), rng);
+        if ( attack.contains("hit")) {
+            enemy.sleep();
+            appendToPane(prompt, attack, Color.green);
+        } else {
+            appendToPane(prompt, attack, Color.black);
+        }
+        if (enemy.getVitality() > 0) {
+            String enemAttack = enemy.brawl(player, rng);
+            if (!enemAttack.contains("hit")) {
+                enemy.sleep();
+                appendToPane(prompt, enemAttack, Color.black);
+            } else {
+                enemy.sleep();
+                appendToPane(prompt, enemAttack, Color.red);
+            }
+        }
+        fight();
         prompt.getGraphics();
         System.setOut(stdout);
     }
 
     private void btnSpecClick(){
-        System.setOut(promptOutput);
-        //StyleConstants.setForeground(promptStyle, Color.black);
-        String attack = ("Special attack\n");
-        appendToPane(prompt, attack, Color.blue);
-//        try {
-//            sPrompt.insertString(sPrompt.getLength(), attack, promptStyle);
-//            System.out.println();
-//
-//        } catch (BadLocationException e) {
-//            e.printStackTrace();
-//        }
-        //prompt.setText("Special attack!");
-        //prompt.setVisible(true);
+        //System.setOut(promptOutput);
+        StyleConstants.setForeground(promptStyle, Color.BLACK);
+        String attack = player.specAttack(enemy, inventory.getEquippedWeapon(), rng);
+        enemy.sleep();
+        if (attack.contains("Special")) {
+            appendToPane(prompt, attack, Color.BLUE);
+        } else if (attack.contains("Standard")) {
+
+            appendToPane(prompt, attack, Color.GREEN);
+        } else {
+            appendToPane(prompt, attack, Color.BLACK);
+        }
+        if (enemy.getVitality() > 0) {
+            enemy.sleep();
+            String enemSpec = enemy.brawl(player, rng);
+            if (!enemSpec.contains("hit")) {
+                appendToPane(prompt, enemy.brawl(player, rng), Color.BLACK);
+            } else {
+                appendToPane(prompt, enemy.brawl(player, rng), Color.RED);
+            }
+        }
+        fight();
         //prompt.getGraphics();
-        System.setOut(stdout);
-        System.out.println("Back to console");
+        //System.setOut(stdout);
+        //System.out.println("print back to console");
 
     }
     private void appendToPane(JTextPane tp, String msg, Color c)
@@ -182,5 +216,32 @@ class BattleGUI {
         tp.setCharacterAttributes(aset, false);
         tp.replaceSelection(msg);
     }
+    public void fight() {
 
+//        do {
+//
+//            if (enemy.getVitality() > 0) {
+//                enemy.brawl(player, rng);
+//            }
+//        } while (player.getVitality() > 0 && enemy.getVitality() > 0);
+        enemyVitlbl.setText("Vitality: " + (enemy.getVitality()));
+        vitalitylbl.setText("Vitality: " + (player.getVitality()));
+        speciallbl.setText("Special Cooldown: " + player.getSpecCooldown());
+        enemyVitlbl.setVisible(true);
+        vitalitylbl.setVisible(true);
+        speciallbl.setVisible(true);
+        if (player.getVitality() <= 0) {
+            enemy.sleep();
+            appendToPane(prompt,player.getName() + " was defeated by " + enemy.getType(), Color.red);
+//            enemy.sleep();
+//            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+//            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+        } else if (enemy.getVitality() <= 0) {
+            enemy.sleep();
+            appendToPane(prompt,player.getName() + " defeated the " + enemy.getType(), Color.green);
+//            enemy.sleep();
+//            WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+//            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+        }
+    }
 }

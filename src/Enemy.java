@@ -13,10 +13,10 @@ public abstract class Enemy {
     protected String type;
     protected int vitality;
     protected int maxVitality;
-    abstract public void attack(Player p, Random rng);
-    abstract public void specAttack(Player p, Random rng);
+    abstract public String attack(Player p, Random rng);
+    abstract public String specAttack(Player p, Random rng);
     abstract public boolean damage(int dam, Random rng);
-    public void Generate(){
+    public void Generate() {
         File f = new File("pictures");
         Random r = new Random();
         for(int b = 0; b < enemy.size(); b++) {
@@ -26,20 +26,19 @@ public abstract class Enemy {
             enemy.add(p, temp);
         }
     }
-    public void brawl(Player p, Random rng) {
-        sleep();
-        System.out.println(getType() + ": " + getVitality());
+    public String brawl(Player p, Random rng) {
+        //System.out.println(getType() + ": " + getVitality());
         if (getVitality() > getMaxVitality()/2) {
             if (rng.nextInt(0,7) == 1) {
-                specAttack(p, rng);
+                return specAttack(p, rng);
             } else {
-                attack(p, rng);
+                return attack(p, rng);
             }
         } else {
             if (rng.nextInt(0,3) == 1) {
-                specAttack(p, rng);
+                return specAttack(p, rng);
             } else {
-                attack(p, rng);
+                return attack(p, rng);
             }
         }
     }

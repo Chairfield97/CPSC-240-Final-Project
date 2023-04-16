@@ -17,9 +17,9 @@ public class Main{
         //inventory.print();
         p.addArmor(inventory.getEquippedArmor());
         System.out.println(p.getName() + ": " + p.getVitality());
-        Battle b = new Battle();
         Grizzly g = new Grizzly();
-        b.fight(inventory, p, g, playerInput, rng);
+        BattleGUI b = new BattleGUI(inventory, p, g, rng);
+        b.fight();
 
         //GUI name input creation
         // create and set up the window.

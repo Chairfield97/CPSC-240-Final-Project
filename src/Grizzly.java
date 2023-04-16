@@ -10,28 +10,24 @@ public class Grizzly extends Enemy {
     private final int maxVitality = getVitality();
 
     @Override
-    public void attack(Player p, Random rng) {
+    public String attack(Player p, Random rng) {
         int damDealt = rng.nextInt(6,12);
         if (p.damage(damDealt, rng)) {
-            sleep();
-            System.out.println(RED + "Paw slice and dice -" + damDealt + "\n");
-            System.out.print(RESET);
+            return("Paw slice and dice hits -" + damDealt + "\n");
+            //System.out.print(RESET);
         } else {
-            sleep();
-            System.out.println(p.getName() + " dodged the slice and dice!\n");
+            return(p.getName() + " dodged the slice and dice!\n");
         }
     }
 
     @Override
-    public void specAttack(Player p, Random rng) {
+    public String specAttack(Player p, Random rng) {
         int damDealt = rng.nextInt(13,20);
         if (p.damage(damDealt,rng)) {
-            sleep();
-            System.out.println(RED + "Unbearable charge!!! - " + damDealt + "\n");
-            System.out.print(RESET);
+            return("Unbearable charge hits!!! -" + damDealt + "\n");
+            //System.out.print(RESET);
         } else {
-            sleep();
-            System.out.println(p.getName() + " dodged Unbearable charge!\n");
+            return(p.getName() + " dodged Unbearable charge!\n");
         }
     }
 

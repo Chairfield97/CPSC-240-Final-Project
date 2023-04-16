@@ -22,9 +22,6 @@ public class Event {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
-
     }
     public void save(PrintWriter pw){
         pw.print(progress+"\n");

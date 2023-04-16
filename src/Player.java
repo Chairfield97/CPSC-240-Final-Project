@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -43,27 +45,39 @@ public class Player {
         return name;
     }
 
-    public void attack(Enemy e, Item weapon, Random rng) {
-        damDealt = weapon.getStrength() + rng.nextInt(0,3);
+    public String attack(Enemy e, Item weapon, Random rng) {
+        damDealt = weapon.getStrength() + rng.nextInt(0,5);
+        specCooldown++;
         if (e.damage(damDealt, rng)) {
-            e.sleep();
-            System.out.println(GREEN + "Standard Attack hits! - " + damDealt);
-            System.out.println(RESET);
+
+            return("Standard Attack hits! - " + damDealt + "\n");
+            //System.out.println(RESET);
         } else {
-            e.sleep();
-            System.out.println("The " + e.getType() + " dodged your standard attack!\n");
+
+            return("The " + e.getType() + " dodged your standard attack!\n");
         }
     }
-    public void specAttack(Enemy e, Item weapon, Random rng) {
-        damDealt = weapon.getStrength() + rng.nextInt(5,10);
-        if (e.damage(damDealt, rng)) {
-            e.sleep();
-            System.out.println(BLUE + "Special Attack hits!!! - " + damDealt);
-            System.out.println(RESET);
+    public String specAttack(Enemy e, Item weapon, Random rng) {
+        damDealt = weapon.getStrength() + rng.nextInt(5,12);
+        if (specCooldown >= 3) {
+            specCooldown = 0;
+            if (e.damage(damDealt, rng)) {
+
+                //System.out.println(RESET);
+                return ("Special Attack hits!!! - " + damDealt + "\n");
+            } else {
+
+                return ("The " + e.getType() + " dodged your special attack!\n");
+            }
         } else {
-            e.sleep();
-            System.out.println("The " + e.getType() + " dodged your special attack!\n");
+            remCooldown = 3 - specCooldown;
+            specCooldown++;
+            return ("Special cooldown remaining: " + remCooldown + "\n");
         }
+
+    }
+    public int getSpecCooldown() {
+        return 3 - specCooldown;
     }
 
     public void brawl(Enemy e, Item weapon, Random rng, Scanner in) {

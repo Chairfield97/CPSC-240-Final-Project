@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Battle {
     public void fight(Inventory inventory, Player p, Enemy enemy, Scanner playerInput, Random rng) {
         enemy.sleep();
-        BattleGUI gui = new BattleGUI(inventory,p , enemy);
+        BattleGUI gui = new BattleGUI(inventory,p , enemy, rng);
         System.out.println("Starting Weapon: " + inventory.getEquippedWeapon());
 //        JPanel panel=new JPanel();
 //        panel.setLayout(new BorderLayout());
@@ -57,7 +57,6 @@ public class Battle {
 //        armFrame.setVisible(true);
 //        enemy.sleep();
         System.out.println("You encountered a " + enemy.getType() + " " + enemy.getVitality() + "\n");
-
 
         do {
             p.brawl(enemy, inventory.getEquippedWeapon(), rng, playerInput);

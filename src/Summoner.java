@@ -6,20 +6,20 @@ public class Summoner extends Enemy {
     private final int maxVitality = getVitality();
 
     @Override
-    public void attack(Player p, Random rng) {
+    public String attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(3,9), rng)) {
-            System.out.println("Bipity boopity boo");
+            return("Bipity boopity boo hits");
         } else {
-            System.out.println(p.getName() + " dodged the Bipity boopity boo!");
+            return(p.getName() + " dodged the Bipity boopity boo!");
         }
     }
 
     @Override
-    public void specAttack(Player p, Random rng) {
+    public String specAttack(Player p, Random rng) {
         if (p.damage(rng.nextInt(14,20),rng)) {
-            System.out.println("Oogie boogie!!!");
+            return("Oogie boogie summon hits!!!");
         } else {
-            System.out.println(p.getName() + " dodged Oogie boogie!");
+            return(p.getName() + " dodged Oogie boogie!");
         }
     }
 

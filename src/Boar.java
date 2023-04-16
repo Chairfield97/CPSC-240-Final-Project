@@ -7,19 +7,19 @@ public class Boar extends Enemy {
     private final int maxVitality = getVitality();
 
     @Override
-    public void attack(Player p, Random rng) {
+    public String attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(4,9), rng)) {
-            System.out.println("Tusk Swipe hits!\n");
+            return("Tusk Swipe hits!\n");
         } else {
-            System.out.println(p.getName() + " dodged the tusk swipe!\n");
+            return(p.getName() + " dodged the tusk swipe!\n");
         }
     }
     @Override
-    public void specAttack(Player p, Random rng) {
+    public String specAttack(Player p, Random rng) {
         if (p.damage(rng.nextInt(12,18), rng)) {
-            System.out.println(RED + "Hog Charge hits!!!\n");
+            return("Hog Charge hits!!!\n");
         } else {
-            System.out.println(p.getName() + " dodged the hog charge!\n");
+            return(p.getName() + " dodged the hog charge!\n");
         }
     }
     public boolean damage(int dam, Random rng) {

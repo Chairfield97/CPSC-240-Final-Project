@@ -11,20 +11,20 @@ public class Wolf extends Enemy {
     private final int maxVitality = getVitality();
 
     @Override
-    public void attack(Player p, Random rng) {
+    public String attack(Player p, Random rng) {
         if (p.damage(rng.nextInt(6,9), rng)) {
-            System.out.println("Wolf bite");
+            return("Wolf bite hits");
         } else {
-            System.out.println(p.getName() + " dodged the wolf bite!");
+            return(p.getName() + " dodged the wolf bite!");
         }
     }
 
     @Override
-    public void specAttack(Player p, Random rng) {
+    public String specAttack(Player p, Random rng) {
         if (p.damage(rng.nextInt(13,18),rng)) {
-            System.out.println("Slash and dash!!!");
+            return("Slash and dash!!!");
         } else {
-            System.out.println(p.getName() + " dodged Slash and dash!");
+            return(p.getName() + " dodged Slash and dash!");
         }
     }
 
