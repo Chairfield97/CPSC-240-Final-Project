@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class PromptOutputStream extends OutputStream {
-    private JTextPane prompt;
-    public PromptOutputStream(JTextPane prompt) {
+    private JTextArea prompt;
+    public PromptOutputStream(JTextArea prompt) {
         this.prompt = prompt;
     }
 

@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Random;
-import java.util.Scanner;
 import javax.swing.text.*;
 
 class BattleGUI {
@@ -18,16 +17,21 @@ class BattleGUI {
     BufferedImage weapImage;
     BufferedImage armImage;
     BufferedImage enemImage;
-    private JTextPane prompt = new JTextPane();
+    private JTextArea prompt = new JTextArea(5,40);
     private JLabel namelbl = new JLabel();
     private JLabel vitalitylbl = new JLabel();
     private JLabel powerlbl = new JLabel();
     private JLabel speciallbl = new JLabel();
     private JLabel enemylbl = new JLabel();
     private JLabel enemyVitlbl = new JLabel();
+    private JPanel contentPane = new JPanel();
+    private JPanel topPanel  = new JPanel();
+    private JPanel centerPanel  = new JPanel();
+    private JPanel centerPanel2 = new JPanel();
+    private JPanel bottomPanel = new JPanel();
     PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
     PrintStream stdout = System.out;
-    Style promptStyle = prompt.addStyle("Style", null);
+//    Style promptStyle = prompt.addStyle("Style", null);
     JScrollPane promptScroll;
     private Inventory inventory;
     private Enemy enemy;
@@ -38,7 +42,7 @@ class BattleGUI {
 
     public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng){
         frame.setTitle("Battle");
-        frame.setSize(800,900);
+        frame.setSize(800,600); //height was 900
         frame.setLocation(new Point(300,200));
         frame.setLayout(null);
         frame.setResizable(false);
@@ -91,7 +95,7 @@ class BattleGUI {
         weapLabel.setBounds(155,5,200,250);
         enemLabel.setBounds(400,5,400, 500);
 
-        prompt.setBounds(0,555,1000,305);
+//        prompt.setBounds(0,555,1000,305);
 
         namelbl.setBounds(20, 425, 100, 20);
         vitalitylbl.setBounds(20, 445, 100, 20);
@@ -105,23 +109,48 @@ class BattleGUI {
         btnAttack.setMnemonic(KeyEvent.VK_A);
         btnSpecAttack.setMnemonic(KeyEvent.VK_S);
 
-        promptScroll = new JScrollPane(prompt, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        promptScroll  = new JScrollPane();
+//        promptScroll = new JScrollPane(prompt, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        promptScroll.setViewportView(prompt);
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(armLabel);
-        frame.add(weapLabel);
-        frame.add(enemLabel);
-        frame.add(btnAttack);
-        frame.add(btnSpecAttack);
+//        frame.add(armLabel);
+//        frame.add(weapLabel);
+//        frame.add(enemLabel);
+//        frame.add(btnAttack);
+//        frame.add(btnSpecAttack);
 
-        frame.add(prompt);
-        frame.getContentPane().add(promptScroll);
-        frame.add(namelbl);
-        frame.add(vitalitylbl);
-        frame.add(powerlbl);
-        frame.add(speciallbl);
-        frame.add(enemylbl);
-        frame.add(enemyVitlbl);
+//        frame.add(prompt);
+//        frame.getContentPane().add(promptScroll);
+//        frame.add(namelbl);
+//        frame.add(vitalitylbl);
+//        frame.add(powerlbl);
+//        frame.add(speciallbl);
+//        frame.add(enemylbl);
+//        frame.add(enemyVitlbl);
+
+        topPanel.add(armLabel);
+        topPanel.add(weapLabel);
+        topPanel.add(enemLabel);
+
+        centerPanel.add(namelbl);
+        centerPanel.add(vitalitylbl);
+        centerPanel.add(powerlbl);
+        centerPanel.add(speciallbl);
+        centerPanel2.add(enemylbl);
+        centerPanel2.add(enemyVitlbl);
+//        centerPanel.add(enemylbl);
+//        centerPanel.add(enemyVitlbl);
+
+        bottomPanel.add(promptScroll);
+        bottomPanel.add(btnAttack);
+        bottomPanel.add(btnSpecAttack);
+
+        contentPane.add(topPanel, BorderLayout.PAGE_START);
+        contentPane.add(centerPanel, BorderLayout.WEST);
+        contentPane.add(centerPanel2, BorderLayout.EAST);
+        contentPane.add(bottomPanel, BorderLayout.PAGE_END);
+        frame.setContentPane(contentPane);
         appendToPane(prompt, ("You encountered a " + enemy.getType() + "!\n"), Color.black);
         frame.setVisible(true);
     }
@@ -152,7 +181,7 @@ class BattleGUI {
 
     private void btnAttackClick(){
         System.setOut(promptOutput);
-        StyleConstants.setForeground(promptStyle, Color.black);
+//        StyleConstants.setForeground(promptStyle, Color.black);
         String attack = player.attack(enemy, inventory.getEquippedWeapon(), rng);
         if ( attack.contains("hit")) {
             enemy.sleep();
@@ -177,7 +206,7 @@ class BattleGUI {
 
     private void btnSpecClick(){
         //System.setOut(promptOutput);
-        StyleConstants.setForeground(promptStyle, Color.BLACK);
+//        StyleConstants.setForeground(promptStyle, Color.BLACK);
         String attack = player.specAttack(enemy, inventory.getEquippedWeapon(), rng);
         enemy.sleep();
         if (attack.contains("Special")) {
@@ -203,7 +232,7 @@ class BattleGUI {
         //System.out.println("print back to console");
 
     }
-    private void appendToPane(JTextPane tp, String msg, Color c)
+    private void appendToPane(JTextArea tp, String msg, Color c)
     {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
@@ -213,7 +242,7 @@ class BattleGUI {
 
         int len = tp.getDocument().getLength();
         tp.setCaretPosition(len);
-        tp.setCharacterAttributes(aset, false);
+//        tp.setCharacterAttributes(aset, false);
         tp.replaceSelection(msg);
     }
     public void fight() {

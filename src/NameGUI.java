@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class NameGUI {
+
     public NameGUI() {
         // create and set up the window.
         JFrame frame = new JFrame("Name Entry");
@@ -20,6 +24,8 @@ public class NameGUI {
 
         JTextField field = new JTextField();
         field.addActionListener(new MainGUI(field));
+
+//        field.addActionListener(new MainGUI(field));
 //        field.addActionListener(new Battle(field));
         field.addActionListener(new MainGUI() {
             @Override
@@ -38,6 +44,12 @@ public class NameGUI {
         frame.setSize(200,80);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+//        String playerInput = field.getText();
+
     }
+
+
+
 
 }
