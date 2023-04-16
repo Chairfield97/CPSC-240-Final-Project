@@ -12,19 +12,21 @@ public class Wolf extends Enemy {
 
     @Override
     public String attack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(6,9), rng)) {
-            return("Wolf bite hits"+"\n");
+        int damDealt = rng.nextInt(4,9);
+        if (p.damage(damDealt, rng)) {
+            return("Wolf bite hits! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged the wolf bite!"+"\n");
+            return(p.getName() + " dodged the wolf bite!\n");
         }
     }
 
     @Override
     public String specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(13,18),rng)) {
-            return("Slash and dash!!!"+"\n");
+        int damDealt = rng.nextInt(10,16);
+        if (p.damage(damDealt,rng)) {
+            return("Throat clamp hits!!! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged Slash and dash!"+"\n");
+            return(p.getName() + " dodged Slash and dash!\n");
         }
     }
 

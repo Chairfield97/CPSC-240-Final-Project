@@ -1,17 +1,27 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
 
 public class Battle {
-    public void fight(Inventory inventory, Player p, Enemy enemy, Random rng) {
-        enemy.sleep();
 
-        BattleGUI gui = new BattleGUI(inventory,p , enemy, rng);
+    private Enemy enemy;
+    private Player player;
+    private Inventory inventory;
+    private Random rng;
+    EventList event = new EventList();
+    ArrayList<Enemy> enemies = event.enemies();
+
+    public Battle(Inventory inventory, Player player, Random rng) {
+        this.enemy = enemies.remove(rng.nextInt(0, enemies.size()));
+        this.player= player;
+        this.inventory = inventory;
+        this.rng = rng;
+        fight();
+    }
+
+    public void fight() {
+        BattleGUI b = new BattleGUI(inventory, player, enemy, rng);
+
 
 
 //

@@ -22,7 +22,7 @@ public class Grizzly extends Enemy {
 
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(13,20);
+        int damDealt = rng.nextInt(13,23);
         if (p.damage(damDealt,rng)) {
             return("Unbearable charge hits!!! -" + damDealt + "\n");
             //System.out.print(RESET);

@@ -8,16 +8,18 @@ public class Boar extends Enemy {
 
     @Override
     public String attack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(4,9), rng)) {
-            return("Tusk Swipe hits!\n");
+        int damDealt = rng.nextInt(6,10);
+        if (p.damage(damDealt, rng)) {
+            return("Tusk Swipe hits! -" + damDealt + "\n");
         } else {
             return(p.getName() + " dodged the tusk swipe!\n");
         }
     }
     @Override
     public String specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(12,18), rng)) {
-            return("Hog Charge hits!!!\n");
+        int damDealt = rng.nextInt(11,18);
+        if (p.damage(damDealt, rng)) {
+            return("Hog Charge hits!!! -" + damDealt + "\n");
         } else {
             return(p.getName() + " dodged the hog charge!\n");
         }

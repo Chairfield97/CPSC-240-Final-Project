@@ -73,37 +73,41 @@ public class Player {
         } else {
             remCooldown = 3 - specCooldown;
             specCooldown++;
-            return ("Special cooldown remaining: " + remCooldown + "\n");
+            return ("Special cooldown remaining: " + getSpecCooldown() + "\n");
         }
 
     }
     public int getSpecCooldown() {
-        return 3 - specCooldown;
-    }
-
-    public void brawl(Enemy e, Item weapon, Random rng, Scanner in) {
-        e.sleep();
-        System.out.println(getName() + ": " + getVitality());
-        System.out.println("Standard (a)ttack, (s)pecial attack or enter to skip");
-        attackChoice = in.nextLine();
-        if (attackChoice.contains("a")) {
-            specCooldown++;
-            attack(e, weapon, rng);
-        } else if (attackChoice.contains("s")) {
-            if (specCooldown >= 3) {
-                specCooldown = 0;
-                specAttack(e, weapon, rng);
-            } else {
-                remCooldown = 3 - specCooldown;
-                System.out.println(BLUE + "Special cooldown remaining: " + remCooldown);
-                System.out.print(RESET);
-                specCooldown++;
-                attack(e, weapon, rng);
-            }
+        if (specCooldown <= 3) {
+            return 3 - specCooldown;
         } else {
-            e.sleep();
-            System.out.println(getName() + " opted to attack the " + e.getType());
-            specCooldown++;
+            return 0;
         }
     }
+
+//    public void brawl(Enemy e, Item weapon, Random rng, Scanner in) {
+//        e.sleep();
+//        System.out.println(getName() + ": " + getVitality());
+//        System.out.println("Standard (a)ttack, (s)pecial attack or enter to skip");
+//        attackChoice = in.nextLine();
+//        if (attackChoice.contains("a")) {
+//            specCooldown++;
+//            attack(e, weapon, rng);
+//        } else if (attackChoice.contains("s")) {
+//            if (specCooldown >= 3) {
+//                specCooldown = 0;
+//                specAttack(e, weapon, rng);
+//            } else {
+//                remCooldown = 3 - specCooldown;
+//                specCooldown++;
+//                System.out.println(BLUE + "Special cooldown remaining: " + getSpecCooldown());
+//                System.out.print(RESET);
+//                attack(e, weapon, rng);
+//            }
+//        } else {
+//            e.sleep();
+//            System.out.println(getName() + " opted to attack the " + e.getType());
+//            specCooldown++;
+//        }
+//    }
 }

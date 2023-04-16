@@ -29,6 +29,7 @@ class BattleGUI {
     private JPanel centerPanel  = new JPanel();
     private JPanel centerPanel2 = new JPanel();
     private JPanel bottomPanel = new JPanel();
+    private boolean closed = false;
     PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
     PrintStream stdout = System.out;
 //    Style promptStyle = prompt.addStyle("Style", null);
@@ -161,6 +162,7 @@ class BattleGUI {
 
             public void windowClosing(WindowEvent e){
                 frame.dispose();
+                closed = true;
             }
         });
 
@@ -266,13 +268,18 @@ class BattleGUI {
             sleep();
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+            closed = true;
         } else if (enemy.getVitality() <= 0) {
 
             appendToPane(prompt,player.getName() + " defeated the " + enemy.getType(), Color.green);
             sleep();
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
+            closed = true;
         }
+    }
+    public boolean getClosed() {
+        return closed;
     }
     public void sleep() {
         try {

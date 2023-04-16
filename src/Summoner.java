@@ -7,19 +7,21 @@ public class Summoner extends Enemy {
 
     @Override
     public String attack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(3,9), rng)) {
-            return("Bipity boopity boo hits"+"\n");
+        int damDealt = rng.nextInt(6,12);
+        if (p.damage(damDealt, rng)) {
+            return("Bipity boopity boo hits! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged the Bipity boopity boo!"+"\n");
+            return(p.getName() + " dodged the Bipity boopity boo!\n");
         }
     }
 
     @Override
     public String specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(14,20),rng)) {
-            return("Oogie boogie summon hits!!!"+"\n");
+        int damDealt = rng.nextInt(17,28);
+        if (p.damage(damDealt,rng)) {
+            return("Oogie boogie summon hits!!! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged Oogie boogie!"+"\n");
+            return(p.getName() + " dodged Oogie boogie!\n");
         }
     }
 

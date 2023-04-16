@@ -125,7 +125,7 @@ public class MainGUI implements ActionListener {
         });
 
         JButton battle = new JButton("To battle!");
-        Battle b = new Battle();
+        //Battle b = new Battle();
         //battle.addActionListener(b.fight());
 
 

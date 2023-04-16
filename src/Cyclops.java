@@ -12,20 +12,22 @@ public class Cyclops extends Enemy {
     private final int maxVitality = getVitality();
     @Override
     public String attack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(2,3), rng)) {
-            return("Clubbin time hit"+"\n");
+        int damDealt = rng.nextInt(8,14);
+        if (p.damage(damDealt, rng)) {
+            return("Clubbin time hit! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged the Clubbin time!"+"\n");
+            return(p.getName() + " dodged the Clubbin time!\n");
         }
     }
 
 
     @Override
     public String specAttack(Player p, Random rng) {
-        if (p.damage(rng.nextInt(20,22),rng)) {
-            return("punch and kick hits!!!"+"\n");
+        int damDealt = rng.nextInt(15,25);
+        if (p.damage(damDealt, rng)) {
+            return("punch and kick hits!!! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged punch and kick!"+"\n");
+            return(p.getName() + " dodged punch and kick!\n");
         }
     }
 
