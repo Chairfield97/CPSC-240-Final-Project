@@ -33,11 +33,11 @@ public class Grizzly extends Enemy {
 
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) == 1) {
-            return false;
-        } else {
+        if (rng.nextInt(0,4) != 1) {
             vitality -= dam;
             return true;
+        } else {
+            return false;
         }
     }
 

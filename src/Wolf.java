@@ -32,7 +32,7 @@ public class Wolf extends Enemy {
 
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) == 1) {
+        if (rng.nextInt(0,2) != 1) {
             vitality -= dam;
             return true;
         } else {
