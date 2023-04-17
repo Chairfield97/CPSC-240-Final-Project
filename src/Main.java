@@ -20,7 +20,7 @@ public class Main{
 
             System.out.println("\n" + p.getName());
             System.out.println("Vitality: " + p.addArmor(inventory.getEquippedArmor()));
-            System.out.println("Carry Capacity : " + inventory.totalWeight() + "/" + carryLimit);
+            System.out.println("Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
             System.out.println(" \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon());
             System.out.println("-------------------------");
             System.out.println("1. Battle");

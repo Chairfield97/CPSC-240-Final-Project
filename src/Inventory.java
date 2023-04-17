@@ -31,12 +31,16 @@ public class Inventory {
     }
     public boolean add(Item item) {     // can add item to inventory and returns if it did or not
 
+        for (int i = 0; i < 3; i++) {
+            inventory.add(new Item(ItemType.Healing, "Health Potion", 1, 5, 30));
+        }
+
         if ((item.getWeight() + totalWeight()) <= carryLimit) { //if player can carry
             inventory.add(item);
-            System.out.println("The " + item + " was added to your inventory.");
+            System.out.println("<The " + item + " was added to your inventory>");
             return true;
         } else {    // if player cannot carry
-            System.out.println("Picking up the " + item + " will exceed your carry limit of " + carryLimit + ".");
+            System.out.println("<Picking up the " + item + " will exceed your carry limit of " + carryLimit + ">");
             return false;
         }
     }

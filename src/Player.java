@@ -13,9 +13,7 @@ public class Player {
     private static String name;
     private static int vitality;
     private static Player theInstance;
-    private String attackChoice;
     private int specCooldown = 0;
-    private int remCooldown;
     private Player(String name) {
         Player.name = name;
         vitality = 50;
@@ -73,7 +71,7 @@ public class Player {
                 return ("The " + e.getType() + " dodged your special attack!\n");
             }
         } else {
-            remCooldown = 3 - specCooldown;
+            //int remCooldown = 3 - specCooldown;
             specCooldown++;
             return ("Special cooldown remaining: " + getSpecCooldown() + "\n");
         }

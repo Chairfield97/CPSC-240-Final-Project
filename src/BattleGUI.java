@@ -17,7 +17,7 @@ class BattleGUI {
     BufferedImage weapImage;
     BufferedImage armImage;
     BufferedImage enemImage;
-    private JTextArea prompt = new JTextArea(5,40);
+    private JTextPane prompt = new JTextPane();
     private JLabel namelbl = new JLabel();
     private JLabel vitalitylbl = new JLabel();
     private JLabel powerlbl = new JLabel();
@@ -29,8 +29,9 @@ class BattleGUI {
     private JPanel centerPanel  = new JPanel();
     private JPanel centerPanel2 = new JPanel();
     private JPanel bottomPanel = new JPanel();
-    PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
-    PrintStream stdout = System.out;
+    private JScrollBar scrollBar;
+    //PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
+//    PrintStream stdout = System.out;
 //    Style promptStyle = prompt.addStyle("Style", null);
     JScrollPane promptScroll;
     private Inventory inventory;
@@ -42,9 +43,10 @@ class BattleGUI {
 
     public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng){
         frame.setTitle("Battle");
-        frame.setSize(800,600); //height was 900
+        frame.setSize(720,600); //height was 900
         frame.setLocation(new Point(300,200));
         frame.setLayout(null);
+        frame.setBackground(Color.darkGray);
         frame.setResizable(false);
         this.inventory = inventory;
         this.player = player;
@@ -109,9 +111,12 @@ class BattleGUI {
         btnAttack.setMnemonic(KeyEvent.VK_A);
         btnSpecAttack.setMnemonic(KeyEvent.VK_S);
 
-        promptScroll  = new JScrollPane();
+        prompt.setFont(new Font("Roman", Font.ITALIC, 16));
+        promptScroll  = new JScrollPane(prompt);
+        promptScroll.setPreferredSize(new Dimension(500, 115));
 //        promptScroll = new JScrollPane(prompt, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         promptScroll.setViewportView(prompt);
+
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        frame.add(armLabel);
@@ -143,6 +148,7 @@ class BattleGUI {
 //        centerPanel.add(enemyVitlbl);
 
         bottomPanel.add(promptScroll);
+        scrollBar = promptScroll.getVerticalScrollBar();
         bottomPanel.add(btnAttack);
         bottomPanel.add(btnSpecAttack);
 
@@ -158,7 +164,6 @@ class BattleGUI {
     private void initEvent(){
 
         frame.addWindowListener(new WindowAdapter() {
-
             public void windowClosing(WindowEvent e){
                 frame.dispose();
             }
@@ -208,7 +213,6 @@ class BattleGUI {
         if (attack.contains("Special")) {
             appendToPane(prompt, attack, Color.BLUE);
         } else if (attack.contains("Standard")) {
-
             appendToPane(prompt, attack, Color.GREEN);
         } else {
             appendToPane(prompt, attack, Color.BLACK);
@@ -227,7 +231,7 @@ class BattleGUI {
         //System.out.println("print back to console");
 
     }
-    private void appendToPane(JTextArea tp, String msg, Color c)
+    private void appendToPane(JTextPane tp, String msg, Color c)
     {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
@@ -237,7 +241,7 @@ class BattleGUI {
 
         int len = tp.getDocument().getLength();
         tp.setCaretPosition(len);
-//        tp.setCharacterAttributes(aset, false);
+        tp.setCharacterAttributes(aset, false);
         tp.replaceSelection(msg);
     }
     public boolean fight() {
@@ -254,18 +258,19 @@ class BattleGUI {
         enemyVitlbl.setVisible(true);
         vitalitylbl.setVisible(true);
         speciallbl.setVisible(true);
-        sleep();
+
         if (player.getVitality() <= 0) {
             appendToPane(prompt,player.getName() + " was defeated by " + enemy.getType(), Color.red);
-
-
+            sleep();
+            sleep();
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             System.out.println("Your adventure ends here " + player.getName());
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
-
             appendToPane(prompt,player.getName() + " defeated the " + enemy.getType(), Color.green);
+            sleep();
+            sleep();
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             if (!inventory.add(ItemGenerator.generate())) {
