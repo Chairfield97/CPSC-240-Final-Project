@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class Main{
     public static void main(String[] args) {
 
+        //attempt at bringing the MainGUI in again
+//        Player p = Player.instance();
+//        new MainGUI(p);
         Player p = Player.instance();
         ItemGenerator.itemSelection("Items.txt"); //passes import file to be imported
         Random rng = new Random();

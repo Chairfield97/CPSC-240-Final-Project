@@ -23,16 +23,16 @@ public class NameGUI {
         JLabel nameLabel = new JLabel("Enter your name");
 
         JTextField field = new JTextField();
-        field.addActionListener(new MainGUI(field));
+//        field.addActionListener(new MainGUI(field));
 
 //        field.addActionListener(new MainGUI(field));
 //        field.addActionListener(new Battle(field));
-        field.addActionListener(new MainGUI() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-            }
-        });
+//        field.addActionListener(new MainGUI() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                frame.dispose();
+//            }
+//        });
         frame.getContentPane().setLayout(mainLayout);
 
 //        frame.getContentPane().add(button);

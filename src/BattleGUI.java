@@ -24,6 +24,7 @@ class BattleGUI {
     private JLabel speciallbl = new JLabel();
     private JLabel enemylbl = new JLabel();
     private JLabel enemyVitlbl = new JLabel();
+    private JLabel extraSpace = new JLabel("\t\t\t\t\t\t\t\t\t\t\t\t\t\n");
     private JPanel contentPane = new JPanel();
     private JPanel topPanel  = new JPanel();
     private JPanel centerPanel  = new JPanel();
@@ -98,13 +99,14 @@ class BattleGUI {
 
 //        prompt.setBounds(0,555,1000,305);
 
-        namelbl.setBounds(20, 425, 100, 20);
-        vitalitylbl.setBounds(20, 445, 100, 20);
-        powerlbl.setBounds(20, 465, 100, 20);
-        speciallbl.setBounds(20, 485, 200, 20);
+        namelbl.setBounds(10, 425, 100, 20);
+        vitalitylbl.setBounds(10, 445, 100, 20);
+        powerlbl.setBounds(10, 465, 100, 20);
+        speciallbl.setBounds(10, 485, 200, 20);
+        extraSpace.setBounds(10,4855,200,20);
 
-        enemylbl.setBounds(680,425,100,20);
-        enemyVitlbl.setBounds(680,445,100,20);
+        enemylbl.setBounds(680,425,120,20);
+        enemyVitlbl.setBounds(680,445,120,20);
 
         // Input ALT+A or ALT+S
         btnAttack.setMnemonic(KeyEvent.VK_A);
@@ -138,6 +140,7 @@ class BattleGUI {
         centerPanel.add(vitalitylbl);
         centerPanel.add(powerlbl);
         centerPanel.add(speciallbl);
+        centerPanel.add(extraSpace);
         centerPanel2.add(enemylbl);
         centerPanel2.add(enemyVitlbl);
 //        centerPanel.add(enemylbl);
@@ -148,6 +151,7 @@ class BattleGUI {
         bottomPanel.add(btnSpecAttack);
 
         contentPane.add(topPanel, BorderLayout.PAGE_START);
+//        contentPane.setBounds(00,400,120,20);
         contentPane.add(centerPanel, BorderLayout.WEST);
         contentPane.add(centerPanel2, BorderLayout.EAST);
         contentPane.add(bottomPanel, BorderLayout.PAGE_END);
