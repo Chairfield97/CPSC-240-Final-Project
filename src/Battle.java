@@ -1,6 +1,6 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
-
 
 public class Battle {
 
@@ -12,9 +12,7 @@ public class Battle {
 
 
     public Battle(Inventory inventory, Player player, Random rng) {
-        eventList.enemySpawn();
-        int numEnemies = eventList.getNumEnemies();
-        this.enemy = (Enemy) eventList.enemySpawn().remove(rng.nextInt(0, numEnemies));
+        this.enemy = eventList.enemySpawn(rng);
         this.player= player;
         this.inventory = inventory;
         this.rng = rng;
@@ -22,11 +20,12 @@ public class Battle {
     }
 
     public void fight() {
-        BattleGUI b = new BattleGUI(inventory, player, enemy, rng);
-
-
-
-//
+        if (this.enemy != null) {
+            new BattleGUI(inventory, player, enemy, rng);
+        } else {
+            System.out.println("You've completed your journey " + player.getName());
+            System.exit(0);
+        }
 //        do {
 //            p.brawl(enemy, inventory.getEquippedWeapon(), rng, playerInput);
 //            if (enemy.getVitality() > 0) {

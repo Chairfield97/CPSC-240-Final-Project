@@ -1,23 +1,17 @@
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class EventList {
 
-    private ArrayList <Enemy> enemies = new ArrayList<>();
-    private ArrayList<Event>events = new ArrayList<>();
+    private ArrayList <Enemy> enemies = new ArrayList<>(Arrays.asList(new Wolf(), new Summoner(), new Grizzly(), new Boar(), new Cyclops()));
+    private ArrayList<String> events = new ArrayList<>();
     private int progress;
 
-    public ArrayList enemySpawn() {
-        enemies.add(new Summoner());
-        enemies.add(new Boar());
-        enemies.add(new Wolf());
-        enemies.add(new Cyclops());
-        enemies.add(new Grizzly());
-        //Collections.shuffle(enemies);
-        return enemies;
+    public Enemy enemySpawn(Random rng) {
+
+        return enemies.remove(rng.nextInt(0,getNumEnemies()));
     }
+
     public boolean save(PrintWriter pw){
         pw.print(events);
         return false;

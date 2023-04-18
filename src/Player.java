@@ -30,6 +30,13 @@ public class Player {
         vitality = 50;
         return vitality += armor.getStrength();
     }
+    public void heal(int health, Item armor) {
+        if (vitality + health > 50 + armor.getStrength()) {
+            addArmor(armor);
+        } else {
+            vitality += health;
+        }
+    }
     public int getVitality() {
 
         return vitality;

@@ -3,14 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Random;
 import javax.swing.text.*;
 
-class BattleGUI {
-
+class BattleGUI extends JDialog {
     JFrame frame = new JFrame();
     private JButton btnAttack  = new JButton("Attack");
     private JButton btnSpecAttack = new JButton("Special Attack");
@@ -42,13 +39,13 @@ class BattleGUI {
 
 
 
-    public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng){
+    public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng) {
+        setModal(true);
         frame.setTitle("Battle");
         frame.setSize(720,600); //height was 900
         frame.setLocation(new Point(300,200));
         frame.setLayout(null);
         frame.setBackground(Color.darkGray);
-        frame.setResizable(false);
         this.inventory = inventory;
         this.player = player;
         this.enemy = enemy;
@@ -63,7 +60,7 @@ class BattleGUI {
         enemyVitlbl.setText("Vitality: " + (enemy.getMaxVitality()));
         namelbl.setText(player.getName());
         speciallbl.setText("Special Cooldown: " + player.getSpecCooldown());
-        player.addArmor(inventory.getEquippedArmor());
+        //player.addArmor(inventory.getEquippedArmor());
         vitalitylbl.setText("Vitality: " + player.getVitality());
         powerlbl.setText("Power: " + inventory.getEquippedWeapon().getStrength());
 
@@ -161,7 +158,9 @@ class BattleGUI {
         contentPane.add(centerPanel2, BorderLayout.EAST);
         contentPane.add(bottomPanel, BorderLayout.PAGE_END);
         frame.setContentPane(contentPane);
-        appendToPane(prompt, ("You encountered a " + enemy.getType() + "!\n"), Color.black);
+        String message = "You encountered a " + enemy.getType() + "!\n";
+        results(message);
+        appendToPane(prompt, message, Color.black);
         frame.setVisible(true);
     }
 
@@ -192,19 +191,24 @@ class BattleGUI {
         //System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.black);
         String attack = player.attack(enemy, inventory.getEquippedWeapon(), rng);
+        results(attack);
         if ( attack.contains("hit")) {
             appendToPane(prompt, attack, Color.green);
         } else {
             appendToPane(prompt, attack, Color.black);
         }
+        frame.setVisible(true);
+        sleep();
         if (enemy.getVitality() > 0) {
             String enemAttack = enemy.brawl(player, rng);
+            results(enemAttack);
             if (!enemAttack.contains("hit")) {
                 appendToPane(prompt, enemAttack, Color.black);
             } else {
                 appendToPane(prompt, enemAttack, Color.red);
             }
         }
+        frame.setVisible(true);
         return fight();
         //prompt.getGraphics();
         //System.setOut(stdout);
@@ -214,6 +218,7 @@ class BattleGUI {
         //System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.BLACK);
         String attack = player.specAttack(enemy, inventory.getEquippedWeapon(), rng);
+        results(attack);
         if (attack.contains("Special")) {
             appendToPane(prompt, attack, Color.BLUE);
         } else if (attack.contains("Standard")) {
@@ -221,14 +226,18 @@ class BattleGUI {
         } else {
             appendToPane(prompt, attack, Color.BLACK);
         }
+        frame.setVisible(true);
+        sleep();
         if (enemy.getVitality() > 0) {
             String enemSpec = enemy.brawl(player, rng);
+            results(enemSpec);
             if (!enemSpec.contains("hit")) {
                 appendToPane(prompt, enemy.brawl(player, rng), Color.BLACK);
             } else {
                 appendToPane(prompt, enemy.brawl(player, rng), Color.RED);
             }
         }
+        frame.setVisible(true);
         return fight();
         //prompt.getGraphics();
         //System.setOut(stdout);
@@ -247,6 +256,7 @@ class BattleGUI {
         tp.setCaretPosition(len);
         tp.setCharacterAttributes(aset, false);
         tp.replaceSelection(msg);
+
     }
     public boolean fight() {
 
@@ -264,25 +274,36 @@ class BattleGUI {
         speciallbl.setVisible(true);
 
         if (player.getVitality() <= 0) {
-            appendToPane(prompt,player.getName() + " was defeated by " + enemy.getType(), Color.red);
+            String message = player.getName() + " was defeated by " + enemy.getType();
+            results(message + "\n\n");
+            appendToPane(prompt, message, Color.red);
             sleep();
-            sleep();
+            JOptionPane.showMessageDialog(frame, "You were defeated by the " + enemy.getType());
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
-            System.out.println("Your adventure ends here " + player.getName());
+            System.out.println("\nYour adventure ends here " + player.getName());
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
-            appendToPane(prompt,player.getName() + " defeated the " + enemy.getType(), Color.green);
+            String message = player.getName() + " defeated the " + enemy.getType();
+            appendToPane(prompt, message, Color.green);
+            results(message + "\n\n");
             sleep();
-            sleep();
+            JOptionPane.showMessageDialog(frame, "You defeated the " + enemy.getType());
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
-            if (!inventory.add(ItemGenerator.generate())) {
-                inventory.drop();
-            }
             return true;
         }
         return false;
+    }
+    public void results(String result) {
+        try {
+            FileOutputStream fileCreate = new FileOutputStream("Results.txt", true);
+            PrintWriter pw = new PrintWriter(fileCreate);
+            pw.print(result);
+            pw.close();
+        } catch (IOException e) {
+            System.out.println("Could not save the results");
+        }
     }
 
     public void sleep() {

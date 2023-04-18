@@ -131,7 +131,7 @@ public class MainGUI {
         battle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Battle(inventory, p, rng);
+                //new Battle(inventory, p, rng ,pw);
                 System.out.println(p.getName() + ": " + p.getVitality());
             }
         });
