@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Event {
     protected static int progress;
     protected String prompt;
-
     protected Item reward;
     public Event(String prompt, Item reward){
         this.prompt = prompt;

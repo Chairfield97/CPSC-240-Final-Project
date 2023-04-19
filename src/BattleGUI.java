@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Random;
 import javax.swing.text.*;
 
-class BattleGUI extends JDialog {
+class BattleGUI {
     JFrame frame = new JFrame();
     private JButton btnAttack  = new JButton("Attack");
     private JButton btnSpecAttack = new JButton("Special Attack");
@@ -28,7 +28,8 @@ class BattleGUI extends JDialog {
     private JPanel centerPanel2 = new JPanel();
     private JPanel bottomPanel = new JPanel();
     private JScrollBar scrollBar;
-    //PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
+    private boolean conclude;
+//    PrintStream promptOutput = new PrintStream(new PromptOutputStream(prompt));
 //    PrintStream stdout = System.out;
 //    Style promptStyle = prompt.addStyle("Style", null);
     JScrollPane promptScroll;
@@ -37,12 +38,10 @@ class BattleGUI extends JDialog {
     private Player player;
     private Random rng;
 
-
-
     public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng) {
-        setModal(true);
+
         frame.setTitle("Battle");
-        frame.setSize(720,600); //height was 900
+        frame.setSize(720,600);         //height was 900
         frame.setLocation(new Point(300,200));
         frame.setLayout(null);
         frame.setBackground(Color.darkGray);
@@ -50,6 +49,7 @@ class BattleGUI extends JDialog {
         this.player = player;
         this.enemy = enemy;
         this.rng = rng;
+        this.conclude = false;
         initComponent(inventory, player, enemy);
         initEvent();
     }
@@ -112,7 +112,7 @@ class BattleGUI extends JDialog {
 
         prompt.setFont(new Font("Roman", Font.ITALIC, 16));
         promptScroll  = new JScrollPane(prompt);
-        promptScroll.setPreferredSize(new Dimension(500, 115));
+        promptScroll.setPreferredSize(new Dimension(400, 115));
 //        promptScroll = new JScrollPane(prompt, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         promptScroll.setViewportView(prompt);
 
@@ -187,8 +187,8 @@ class BattleGUI extends JDialog {
         });
     }
 
-    private boolean btnAttackClick(){
-        //System.setOut(promptOutput);
+    private boolean btnAttackClick() {
+//        System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.black);
         String attack = player.attack(enemy, inventory.getEquippedWeapon(), rng);
         results(attack);
@@ -221,7 +221,8 @@ class BattleGUI extends JDialog {
         results(attack);
         if (attack.contains("Special")) {
             appendToPane(prompt, attack, Color.BLUE);
-        } else if (attack.contains("Standard")) {
+        }
+        else if (attack.contains("Standard")) {
             appendToPane(prompt, attack, Color.GREEN);
         } else {
             appendToPane(prompt, attack, Color.BLACK);
@@ -231,10 +232,10 @@ class BattleGUI extends JDialog {
         if (enemy.getVitality() > 0) {
             String enemSpec = enemy.brawl(player, rng);
             results(enemSpec);
-            if (!enemSpec.contains("hit")) {
-                appendToPane(prompt, enemy.brawl(player, rng), Color.BLACK);
+            if (enemSpec.contains("hit")) {
+                appendToPane(prompt, enemSpec, Color.RED);
             } else {
-                appendToPane(prompt, enemy.brawl(player, rng), Color.RED);
+                appendToPane(prompt, enemSpec, Color.BLACK);
             }
         }
         frame.setVisible(true);
@@ -279,16 +280,21 @@ class BattleGUI extends JDialog {
             appendToPane(prompt, message, Color.red);
             sleep();
             JOptionPane.showMessageDialog(frame, "You were defeated by the " + enemy.getType());
+            conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             System.out.println("\nYour adventure ends here " + player.getName());
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
-            String message = player.getName() + " defeated the " + enemy.getType();
+            Item reward = ItemGenerator.generate();
+            String message = (player.getName() + " defeated the " + enemy.getType() + " and earned " + reward.getName());
             appendToPane(prompt, message, Color.green);
             results(message + "\n\n");
             sleep();
-            JOptionPane.showMessageDialog(frame, "You defeated the " + enemy.getType());
+            JOptionPane.showMessageDialog(frame, message);
+            inventory.sort(reward);
+
+            conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             return true;
@@ -304,6 +310,10 @@ class BattleGUI extends JDialog {
         } catch (IOException e) {
             System.out.println("Could not save the results");
         }
+    }
+
+    public boolean getConclusion() {
+        return this.conclude;
     }
 
     public void sleep() {

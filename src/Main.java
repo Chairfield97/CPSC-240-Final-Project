@@ -31,7 +31,8 @@ public class Main {
         while (prompt) {    //while player does not select exit
 
             System.out.println("\n" + p.getName());
-            System.out.println("Vitality: " + p.getVitality());
+            System.out.println("Vitality: " + p.getVitality() + "/" + p.getMaxVitality(inventory.getEquippedArmor()));
+            System.out.println("Power: " + inventory.getEquippedWeapon().getStrength());
             System.out.println("Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
             System.out.println(" \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon());
             System.out.println("------------------------------");
@@ -44,13 +45,11 @@ public class Main {
             System.out.println("7. Exit");
             System.out.print(": ");
 
-
             userSelection = input.nextInt();    //scans users input
             System.out.println();
             switch (userSelection) {
                 case 1:
                     new Battle(inventory, p, rng);
-                    inventory.add(ItemGenerator.generate());
                     break;
                 case 2:     //print inventory choice
                     inventory.print();
@@ -72,5 +71,6 @@ public class Main {
                     prompt = false;
             }
         }
+        input.close();
     }
 }

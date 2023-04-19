@@ -21,7 +21,15 @@ public class Battle {
 
     public void fight() {
         if (this.enemy != null) {
-            new BattleGUI(inventory, player, enemy, rng);
+
+            BattleGUI b = new BattleGUI (inventory, player, enemy, rng);
+//            boolean concluded;
+//            do {
+//                concluded = b.getConclusion();
+//
+//            }
+//            while (!concluded);
+
         } else {
             System.out.println("You've completed your journey " + player.getName());
             System.exit(0);

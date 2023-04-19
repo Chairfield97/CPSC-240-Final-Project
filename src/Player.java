@@ -26,6 +26,9 @@ public class Player {
         }
         return theInstance;
     }
+    public int getMaxVitality(Item armor) {
+        return 50 + armor.getStrength();
+    }
     public int addArmor(Item armor) {
         vitality = 50;
         return vitality += armor.getStrength();
