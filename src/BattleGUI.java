@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.text.*;
 
 class BattleGUI {
+
     JFrame frame = new JFrame();
     private JButton btnAttack  = new JButton("Attack");
     private JButton btnSpecAttack = new JButton("Special Attack");
@@ -37,6 +38,7 @@ class BattleGUI {
     private Enemy enemy;
     private Player player;
     private Random rng;
+    private Item reward;
 
     public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng) {
 
@@ -50,6 +52,7 @@ class BattleGUI {
         this.enemy = enemy;
         this.rng = rng;
         this.conclude = false;
+        this.reward = ItemGenerator.generate();
         initComponent(inventory, player, enemy);
         initEvent();
     }
@@ -280,21 +283,18 @@ class BattleGUI {
             appendToPane(prompt, message, Color.red);
             sleep();
             JOptionPane.showMessageDialog(frame, "You were defeated by the " + enemy.getType());
-            conclude = true;
+            this.conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             System.out.println("\nYour adventure ends here " + player.getName());
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
-            Item reward = ItemGenerator.generate();
             String message = (player.getName() + " defeated the " + enemy.getType() + " and earned " + reward.getName());
             appendToPane(prompt, message, Color.green);
             results(message + "\n\n");
             sleep();
             JOptionPane.showMessageDialog(frame, message);
-            inventory.sort(reward);
-
-            conclude = true;
+            this.conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             return true;
@@ -314,6 +314,9 @@ class BattleGUI {
 
     public boolean getConclusion() {
         return this.conclude;
+    }
+    public Item getReward() {
+        return reward;
     }
 
     public void sleep() {

@@ -167,10 +167,12 @@ public class Inventory {
         }
     }
     public void sort (Item item) {
-        String choice;
+        String choice ="";
         do {
-            System.out.println("(Y)es to add " + item.getName() + " Weight: " +item.getWeight() + " to your inventory or (N)o to discard");
+
+            System.out.println("(Y)es to add " + item.getName() + " Weight: " + item.getWeight() + " to your inventory or (N)o to discard");
             choice = scnr.nextLine();
+
         } while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N"));
 
         if (choice.equalsIgnoreCase("Y"))

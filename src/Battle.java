@@ -8,7 +8,9 @@ public class Battle {
     private Player player;
     private Inventory inventory;
     private Random rng;
+    private boolean finished;
     EventList eventList = new EventList();
+    BattleGUI b;
 
 
     public Battle(Inventory inventory, Player player, Random rng) {
@@ -16,23 +18,34 @@ public class Battle {
         this.player= player;
         this.inventory = inventory;
         this.rng = rng;
-        fight();
+        this.finished = false;
+    }
+    public boolean finished() {
+        return this.finished;
     }
 
-    public void fight() {
+
+    public boolean fight() {
         if (this.enemy != null) {
 
             BattleGUI b = new BattleGUI (inventory, player, enemy, rng);
+
 //            boolean concluded;
 //            do {
 //                concluded = b.getConclusion();
 //
 //            }
 //            while (!concluded);
+            this.finished = b.getConclusion();
+
+
+            return true;
 
         } else {
             System.out.println("You've completed your journey " + player.getName());
             System.exit(0);
+
+            return this.finished;
         }
 //        do {
 //            p.brawl(enemy, inventory.getEquippedWeapon(), rng, playerInput);
@@ -48,5 +61,6 @@ public class Battle {
 //            enemy.sleep();
 //            System.out.println(p.getName() + " defeated the " + enemy.getType());
 //        }
+
     }
 }

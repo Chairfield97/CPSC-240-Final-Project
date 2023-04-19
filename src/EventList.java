@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -8,8 +9,11 @@ public class EventList {
     private int progress;
 
     public Enemy enemySpawn(Random rng) {
-
-        return enemies.remove(rng.nextInt(0,getNumEnemies()));
+        if (enemies.size()==0) {
+            JOptionPane.showMessageDialog(null, "Congratulations you defeated all enemies");
+            System.exit(0);
+        }
+        return enemies.remove(rng.nextInt(0, getNumEnemies()));
     }
 
     public boolean save(PrintWriter pw){

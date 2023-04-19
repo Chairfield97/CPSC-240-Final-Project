@@ -19,19 +19,22 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Unable to erase previous results");
         }
-        Player p = Player.instance();
+        EventList eventList = new EventList();
+        Player player = Player.instance();
         ItemGenerator.itemSelection("Items.txt");    //passes import file to be imported
         Random rng = new Random();
         int carryLimit = rng.nextInt(70,111);   //generates random carry limit
         Inventory inventory = new Inventory(carryLimit);    //passes carry limit to inventory
-        p.addArmor(inventory.getEquippedArmor());
+        player.addArmor(inventory.getEquippedArmor());
         Scanner input = new Scanner(System.in);
         boolean prompt = true;
+        boolean conclusion = true;
         int userSelection;
-        while (prompt) {    //while player does not select exit
+        while (prompt) {    //while player does not select exit and the battle rages on
 
-            System.out.println("\n" + p.getName());
-            System.out.println("Vitality: " + p.getVitality() + "/" + p.getMaxVitality(inventory.getEquippedArmor()));
+            conclusion = false;
+            System.out.println("\n" + player.getName());
+            System.out.println("Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
             System.out.println("Power: " + inventory.getEquippedWeapon().getStrength());
             System.out.println("Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
             System.out.println(" \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon());
@@ -49,13 +52,18 @@ public class Main {
             System.out.println();
             switch (userSelection) {
                 case 1:
-                    new Battle(inventory, p, rng);
+                    Enemy enemy = eventList.enemySpawn(rng);
+                    BattleGUI b = new BattleGUI (inventory, player, enemy, rng);
+                    while(!conclusion) {
+                        conclusion = b.getConclusion();
+                    }
+                    inventory.sort(b.getReward());
                     break;
                 case 2:     //print inventory choice
                     inventory.print();
                     break;
                 case 3:     //heal the player
-                    p.heal(inventory.useHeal(), inventory.getEquippedArmor());
+                    player.heal(inventory.useHeal(), inventory.getEquippedArmor());
                     break;
                 case 4:     //drop item choice
                     inventory.drop();
@@ -67,7 +75,7 @@ public class Main {
                     inventory.equipArmor();
                     break;
                 case 7:     //exit out
-                    System.out.println("Good luck on your journey " + p.getName());
+                    System.out.println("Good luck on your journey " + player.getName());
                     prompt = false;
             }
         }
