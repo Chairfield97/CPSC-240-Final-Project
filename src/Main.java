@@ -57,7 +57,9 @@ public class Main {
                     while(!conclusion) {
                         conclusion = b.getConclusion();
                     }
-                    inventory.sort(b.getReward());
+                    if(player.getVitality()!=0) {
+                        inventory.sort(b.getReward());
+                    }
                     break;
                 case 2:     //print inventory choice
                     inventory.print();
