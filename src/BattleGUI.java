@@ -177,10 +177,9 @@ class BattleGUI {
         });
 
         btnAttack.addActionListener(new ActionListener() {
-            // adds the action of clicking on the attack button
+            // adds the action of clicking on the attack button and sound
 
             public void actionPerformed(ActionEvent e) {
-                btnAttackClick();
                 String soundname="audio/my-sword-hit-1wav-89026(1).wav";
                 AudioInputStream audioInputStream;
                 {
@@ -197,15 +196,16 @@ class BattleGUI {
                         throw new RuntimeException(es);
                     }
                 }
+                btnAttackClick();
 
             }
         });
 
         btnSpecAttack.addActionListener(new ActionListener() {
-            //adds the action of clicking on the special attack button
+            //adds the action of clicking on the special attack button and sound
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnSpecClick();
+
                 String soundname="audio/metal-design-explosion-13491.wav";
                 AudioInputStream audioInputStream;
 
@@ -223,6 +223,7 @@ class BattleGUI {
                         throw new RuntimeException(es);
                     }
                 }
+                btnSpecClick();
             }
         });
     }
@@ -326,6 +327,7 @@ class BattleGUI {
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             System.out.println("\nYour adventure ends here " + player.getName());
+
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
             String message = (player.getName() + " defeated the " + enemy.getType() + " and earned a " + reward.getName() + "\n");
