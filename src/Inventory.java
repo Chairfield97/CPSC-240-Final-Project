@@ -161,7 +161,7 @@ public class Inventory {
         } else if (!(healChoice == healSelection.size() + 1)) {     //if player makes a valid selection
             Item healItem = healSelection.get(healChoice - 1);
             System.out.println("You used the " + healItem.getName());
-            inventory.remove(inventory.indexOf(healItem));
+            inventory.remove(healItem);
             return healItem.getStrength();
         } else {                                //everything else
             System.out.println("Use healing item cancelled.");
@@ -169,19 +169,20 @@ public class Inventory {
         }
     }
     public void sort (Item item) {
-        String choice ="";
-        while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N")) {
+        String choice;
+        Scanner input = new Scanner(System.in);
+        do {
 
             System.out.println("(Y)es to add " + item.getName() + " Weight: " + item.getWeight() + " Value: " + item.getValue() + " to your inventory or (N)o to discard");
-            choice = scnr.nextLine();
+            choice = input.nextLine();
 
-        }
+        } while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N"));
 
         if (choice.equalsIgnoreCase("Y"))
             while (!add(item)) {
                 drop();
         } else if (choice.equalsIgnoreCase("N")) {
-                System.out.println("You discard the " + item.getName());
+                System.out.println("You discarded the " + item.getName());
         }
     }
     public Item getEquippedWeapon() {

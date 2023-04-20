@@ -290,7 +290,7 @@ class BattleGUI {
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
             String message = (player.getName() + " defeated the " + enemy.getType() + " and earned a " + reward.getName());
-            appendToPane(prompt, message, Color.green);
+            appendToPane(prompt, message + "\n", Color.green);
             results(message + "\n");
             sleep();
             JOptionPane.showMessageDialog(frame, message);
