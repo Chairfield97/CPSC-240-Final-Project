@@ -322,12 +322,28 @@ class BattleGUI {
             results(message + "\n\n");
             appendToPane(prompt, message, Color.red);
             sleep();
+            String soundname="audio/8bit-lose-life-sound-wav-97245.wav";
+            AudioInputStream audioInputStream;
+
+            {
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundname).getAbsoluteFile());
+                    Clip clip=AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException es) {
+                    throw new RuntimeException(es);
+                } catch (IOException es) {
+                    throw new RuntimeException(es);
+                } catch (LineUnavailableException es) {
+                    throw new RuntimeException(es);
+                }
+            }
             JOptionPane.showMessageDialog(frame, "You were defeated by the " + enemy.getType());
             this.conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
             System.out.println("\nYour adventure ends here " + player.getName());
-
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
             String message = (player.getName() + " defeated the " + enemy.getType() + " and earned a " + reward.getName() + "\n");
