@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Random;
 import javax.swing.text.*;
-
+// Creating the BattleGUI
 class BattleGUI {
 
     JFrame frame = new JFrame();
@@ -39,7 +39,7 @@ class BattleGUI {
     private Player player;
     private Random rng;
     private Item reward;
-
+    //Constructor and prints out what it is in BattleGUI
     public BattleGUI(Inventory inventory, Player player, Enemy enemy, Random rng) {
 
         frame.setTitle("Battle");
@@ -56,7 +56,7 @@ class BattleGUI {
         initComponent(inventory, player, enemy);
         initEvent();
     }
-
+    // Sets the text for Inventory, player and enemy health, special attacks, power, prints out the pictures as well.
     private void initComponent(Inventory inventory, Player player, Enemy enemy) {
 
         enemylbl.setText(enemy.getType());
@@ -166,7 +166,7 @@ class BattleGUI {
         appendToPane(prompt, message, Color.black);
         frame.setVisible(true);
     }
-
+    //closes the window
     private void initEvent(){
 
         frame.addWindowListener(new WindowAdapter() {
@@ -176,20 +176,21 @@ class BattleGUI {
         });
 
         btnAttack.addActionListener(new ActionListener() {
-
+            // adds the action of clicking on the attack button
             public void actionPerformed(ActionEvent e) {
                 btnAttackClick();
             }
         });
 
         btnSpecAttack.addActionListener(new ActionListener() {
+            //adds the action of clicking on the special attack button
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnSpecClick();
             }
         });
     }
-
+    // says if they hit the enemy with attack else dodge
     private boolean btnAttackClick() {
 //        System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.black);
@@ -216,7 +217,7 @@ class BattleGUI {
         //prompt.getGraphics();
         //System.setOut(stdout);
     }
-
+    //says if they use special attacks or they dodge
     private boolean btnSpecClick(){
         //System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.BLACK);
@@ -248,6 +249,7 @@ class BattleGUI {
         //System.out.println("print back to console");
 
     }
+    //shows the different colors if the word is in different colors
     private void appendToPane(JTextPane tp, String msg, Color c)
     {
         StyleContext sc = StyleContext.getDefaultStyleContext();
@@ -262,6 +264,7 @@ class BattleGUI {
         tp.replaceSelection(msg);
 
     }
+    //where we move fight from battle in order to get passed a bug fix
     public boolean fight() {
 
 //        do {
@@ -301,6 +304,7 @@ class BattleGUI {
         }
         return false;
     }
+    // where we to the file for the results of the battle
     public void results(String result) {
         try {
             FileOutputStream fileCreate = new FileOutputStream("Results.txt", true);
@@ -311,14 +315,15 @@ class BattleGUI {
             System.out.println("Could not save the results");
         }
     }
-
+// returns conclude
     public boolean getConclusion() {
         return this.conclude;
     }
+    //returns the item that you get for winning
     public Item getReward() {
         return reward;
     }
-
+    // how long the Gui stays open after defeating the enemy
     public void sleep() {
         try {
             Thread.sleep(1000);
