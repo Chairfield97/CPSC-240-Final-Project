@@ -1,7 +1,7 @@
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
-
+// For the player and Enemy to battle
 public class Battle {
 
     private Enemy enemy;
@@ -11,8 +11,7 @@ public class Battle {
     private boolean finished;
     EventList eventList = new EventList();
     BattleGUI b;
-
-
+    //Battle Constuctor what it is supposed to print out
     public Battle(Inventory inventory, Player player, Random rng) {
         this.enemy = eventList.enemySpawn(rng);
         this.player= player;
@@ -20,11 +19,11 @@ public class Battle {
         this.rng = rng;
         this.finished = false;
     }
+    // returns if the battle is true
     public boolean finished() {
         return this.finished;
     }
-
-
+    //returns the battle and used the BattleGui
     public boolean fight() {
         if (this.enemy != null) {
 
