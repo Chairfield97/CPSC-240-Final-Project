@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -177,8 +178,26 @@ class BattleGUI {
 
         btnAttack.addActionListener(new ActionListener() {
             // adds the action of clicking on the attack button
+
             public void actionPerformed(ActionEvent e) {
                 btnAttackClick();
+                String soundname="audio/my-sword-hit-1wav-89026(1).wav";
+                AudioInputStream audioInputStream;
+                {
+                    try {
+                        audioInputStream = AudioSystem.getAudioInputStream(new File(soundname).getAbsoluteFile());
+                        Clip clip=AudioSystem.getClip();
+                        clip.open(audioInputStream);
+                        clip.start();
+                    } catch (UnsupportedAudioFileException es) {
+                        throw new RuntimeException(es);
+                    } catch (IOException es) {
+                        throw new RuntimeException(es);
+                    } catch (LineUnavailableException es) {
+                        throw new RuntimeException(es);
+                    }
+                }
+
             }
         });
 
@@ -187,6 +206,23 @@ class BattleGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnSpecClick();
+                String soundname="audio/metal-design-explosion-13491.wav";
+                AudioInputStream audioInputStream;
+
+                {
+                    try {
+                        audioInputStream = AudioSystem.getAudioInputStream(new File(soundname).getAbsoluteFile());
+                        Clip clip=AudioSystem.getClip();
+                        clip.open(audioInputStream);
+                        clip.start();
+                    } catch (UnsupportedAudioFileException es) {
+                        throw new RuntimeException(es);
+                    } catch (IOException es) {
+                        throw new RuntimeException(es);
+                    } catch (LineUnavailableException es) {
+                        throw new RuntimeException(es);
+                    }
+                }
             }
         });
     }
