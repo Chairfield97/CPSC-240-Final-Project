@@ -60,7 +60,7 @@ public class Inventory {
             System.out.printf("%-30s%11s%10s%13s\n",i,i.getWeight(),i.getValue(),i.getStrength());
         }
     }
-    public void drop() {    //removes selected item from player inventory
+    public Item drop() {    //removes selected item from player inventory
         System.out.println("\nDrop an item ");
         System.out.printf("   %-28s %10s %9s %13s","Item","Weight","Value","Strength\n");
         for (Item i : inventory) {      //prints all items
@@ -78,12 +78,14 @@ public class Inventory {
         scnr.nextLine();
         if (inventory.size() == 0) {    //if player inventory is empty
             System.out.println("No items in inventory.");
+            return null;
         }
         else if ( 0 <= choice && choice < inventory.size()) {   //if player makes a valid selection
             System.out.println("You dropped the " + inventory.get(choice));
-            inventory.remove(choice);
+            return inventory.remove(choice);
         } else {                                                //everything else
             System.out.println("Drop cancelled");
+            return null;
         }
     }
     public void equipWeapon() {     //equips weapon of players choice from inventory
@@ -168,12 +170,12 @@ public class Inventory {
     }
     public void sort (Item item) {
         String choice ="";
-        do {
+        while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N")) {
 
-            System.out.println("(Y)es to add " + item.getName() + " Weight: " + item.getWeight() + " to your inventory or (N)o to discard");
+            System.out.println("(Y)es to add " + item.getName() + " Weight: " + item.getWeight() + " Value: " + item.getValue() + " to your inventory or (N)o to discard");
             choice = scnr.nextLine();
 
-        } while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N"));
+        }
 
         if (choice.equalsIgnoreCase("Y"))
             while (!add(item)) {

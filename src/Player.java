@@ -9,14 +9,18 @@ public class Player {
     String BLUE = "\u001B[34m";
     String GREEN = "\033[0;32m";
     String RESET = "\033[0m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001B[0m";
     private int damDealt;
     private static String name;
     private static int vitality;
+    private int credits;
     private static Player theInstance;
     private int specCooldown = 0;
     private Player(String name) {
         Player.name = name;
         vitality = 50;
+        credits = 10;
     }
     public static synchronized Player instance() {
 //        Scanner nameInput = new Scanner(System.in);
@@ -39,6 +43,25 @@ public class Player {
         } else {
             vitality += health;
         }
+    }
+    public int bonusCredits(Random rng) {
+        int bonus = 0;
+        int chance = rng.nextInt(1,4);
+        if (chance != 1) {
+            bonus = rng.nextInt(10,26);
+            System.out.println(ANSI_YELLOW + "You also found " + bonus + " credits!" + ANSI_RESET);
+            credits += bonus;
+        }
+        return bonus;
+    }
+    public int getCredits() {
+        return credits;
+    }
+    public int addCredits(int creds) {
+       return credits += creds;
+    }
+    public int removeCredits(int creds) {
+        return credits -= creds;
     }
     public int getVitality() {
 

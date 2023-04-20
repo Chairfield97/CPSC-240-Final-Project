@@ -30,6 +30,9 @@ public class ItemGenerator {
             System.exit(0);
         }
     }
+    public static void restore(Item item) {
+        items.add(item);
+    }
     public static Item generate() {     //returns an item from the available items
         Random rng = new Random();
         int index = 0;

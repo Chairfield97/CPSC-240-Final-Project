@@ -7,6 +7,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+
     public static void main(String[] args) {
 
         //attempt at bringing the MainGUI in again
@@ -25,6 +32,7 @@ public class Main {
         Random rng = new Random();
         int carryLimit = rng.nextInt(70,111);   //generates random carry limit
         Inventory inventory = new Inventory(carryLimit);    //passes carry limit to inventory
+        Merchant merchant = new Merchant();
         player.addArmor(inventory.getEquippedArmor());
         Scanner input = new Scanner(System.in);
         boolean prompt = true;
@@ -34,18 +42,20 @@ public class Main {
 
             conclusion = false;
             System.out.println("\n" + player.getName());
-            System.out.println("Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
-            System.out.println("Power: " + inventory.getEquippedWeapon().getStrength());
-            System.out.println("Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
-            System.out.println(" \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon());
+            System.out.println(ANSI_CYAN + "Power: " + inventory.getEquippedWeapon().getStrength());
+            System.out.println(ANSI_YELLOW + "Credits: " + player.getCredits());
+            System.out.println(ANSI_RED + "Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
+            System.out.println(ANSI_PURPLE + "Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
+            System.out.println(ANSI_BLUE + " \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon() + ANSI_RESET);
             System.out.println("------------------------------");
             System.out.println("1. Battle");
             System.out.println("2. Print Inventory");
             System.out.println("3. Use Healing Item");
-            System.out.println("4. Drop item");
-            System.out.println("5. Equip weapon");
-            System.out.println("6. Equip armor");
-            System.out.println("7. Exit");
+            System.out.println("4. Visit Merchant");
+            System.out.println("5. Drop item");
+            System.out.println("6. Equip weapon");
+            System.out.println("7. Equip armor");
+            System.out.println("8. Exit");
             System.out.print(": ");
 
             userSelection = input.nextInt();    //scans users input
@@ -57,28 +67,36 @@ public class Main {
                     while(!conclusion) {
                         conclusion = b.getConclusion();
                     }
-                    if(player.getVitality()>=0) {
+                    if(player.getVitality() > 0) {
                         inventory.sort(b.getReward());
+                        player.bonusCredits(rng);
+                    } else {
+                        prompt = false;
                     }
                     break;
                 case 2:     //print inventory choice
                     inventory.print();
                     break;
                 case 3:     //heal the player
+                    System.out.println("Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
                     player.heal(inventory.useHeal(), inventory.getEquippedArmor());
                     break;
-                case 4:     //drop item choice
+                case 4:
+                    merchant.greeting(inventory, player, rng);
+                    break;
+                case 5:     //drop item choice
                     inventory.drop();
                     break;
-                case 5:     //equip weapon choice
+                case 6:     //equip weapon choice
                     inventory.equipWeapon();
                     break;
-                case 6:     //equip armor choice
+                case 7:     //equip armor choice
                     inventory.equipArmor();
                     break;
-                case 7:     //exit out
+                case 8:     //exit out
                     System.out.println("Good luck on your journey " + player.getName());
                     prompt = false;
+                    break;
             }
         }
         input.close();

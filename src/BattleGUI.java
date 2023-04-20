@@ -289,9 +289,9 @@ class BattleGUI {
             System.out.println("\nYour adventure ends here " + player.getName());
             System.exit(0);
         } else if (enemy.getVitality() <= 0) {
-            String message = (player.getName() + " defeated the " + enemy.getType() + " and earned " + reward.getName());
+            String message = (player.getName() + " defeated the " + enemy.getType() + " and earned a " + reward.getName());
             appendToPane(prompt, message, Color.green);
-            results(message + "\n\n");
+            results(message + "\n");
             sleep();
             JOptionPane.showMessageDialog(frame, message);
             this.conclude = true;

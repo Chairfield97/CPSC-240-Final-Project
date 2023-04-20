@@ -5,34 +5,34 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class Wolf extends Enemy {
-    private String type = "Ravenous Wolf";
+public class Mercenary extends Enemy {
+    private String type = "Marksman Mercenary";
     private int vitality = 30;
     private final int maxVitality = getVitality();
 
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(4,9);
+        int damDealt = rng.nextInt(7,13);
         if (p.damage(damDealt, rng)) {
-            return("Wolf bite hits! -" + damDealt + "\n");
+            return("Arrow shot hits! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged the wolf bite!\n");
+            return(p.getName() + " dodged the arrow shot!\n");
         }
     }
 
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(10,16);
+        int damDealt = rng.nextInt(13,19);
         if (p.damage(damDealt,rng)) {
-            return("Throat clamp hits!!! -" + damDealt + "\n");
+            return("Crude explosive hits!!! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged Slash and dash!\n");
+            return(p.getName() + " dodged the crude explosive!\n");
         }
     }
 
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,2) != 1) {
+        if (rng.nextInt(0,3) != 1) {
             vitality -= dam;
             return true;
         } else {
