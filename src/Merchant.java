@@ -89,7 +89,7 @@ public class Merchant {
                     if (sale == null) {
                         System.out.println(ANSI_GREEN + "\"Maybe next time stranger\"\n" + ANSI_RESET);
                         selling = false;
-                    } else if (player.addCredits(sale.getValue()) > player.getCredits()) {
+                    } else if (player.addCredits(sale.getValue()) > 0) {
                         System.out.println(ANSI_GREEN + "\"Hehehehe, thank you.\"\n" + ANSI_RESET);
                         shopItems.add(sale);
                     } else {
