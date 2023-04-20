@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
+// Added the abstract as a Enemy
 public abstract class Enemy {
     ArrayList <Enemy> enemy = new ArrayList<>();
     String RED = "\u001B[31m";
@@ -26,6 +26,7 @@ public abstract class Enemy {
             enemy.add(p, temp);
         }
     }
+    //Player randomized attacks when clicked
     public String brawl(Player p, Random rng) {
         //System.out.println(getType() + ": " + getVitality());
         if (getVitality() > getMaxVitality()/2) {
@@ -42,15 +43,19 @@ public abstract class Enemy {
             }
         }
     }
+    //getting type
     public String getType() {
         return type;
     }
+    // getting health
     public int getVitality() {
         return vitality;
     }
+    //getting Max health
     public int getMaxVitality() {
         return maxVitality;
     }
+    //Was using this to make it wait longer.
     public void sleep() {
         try {
             Thread.sleep(1000);
