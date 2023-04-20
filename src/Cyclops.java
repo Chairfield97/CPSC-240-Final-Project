@@ -5,11 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-
+//inherited from Enemy
 public class Cyclops extends Enemy {
     private String type = "Close-Minded Cyclops";
     private int vitality=45;
     private final int maxVitality = getVitality();
+    // randomized enemy attack on player
     @Override
     public String attack(Player p, Random rng) {
         int damDealt = rng.nextInt(8,14);
@@ -19,8 +20,7 @@ public class Cyclops extends Enemy {
             return(p.getName() + " dodged the Clubbin time!\n");
         }
     }
-
-
+    //randomized enemy special attack on player
     @Override
     public String specAttack(Player p, Random rng) {
         int damDealt = rng.nextInt(15,25);
@@ -30,7 +30,7 @@ public class Cyclops extends Enemy {
             return(p.getName() + " dodged punch and kick!\n");
         }
     }
-
+    // if enemy is able to dodge
     @Override
     public boolean damage(int dam, Random rng) {
         if (rng.nextInt(0,5) != 1) {
@@ -40,16 +40,17 @@ public class Cyclops extends Enemy {
             return false;
         }
     }
-
+    //return type
     @Override
     public String getType() {
         return type;
     }
-
+    //return health
     @Override
     public int getVitality() {
         return vitality;
     }
+    //return max health
     public int getMaxVitality() {
         return maxVitality;
     }
