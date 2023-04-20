@@ -1,5 +1,8 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -54,6 +57,22 @@ public class Player {
         int bonus = 0;
         int chance = rng.nextInt(1,4);
         if (chance != 1) {
+            String soundname="audio/cashier-quotka-chingquot-sound-effect-129698.wav";
+            AudioInputStream audioInputStream;
+            {
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundname).getAbsoluteFile());
+                    Clip clip=AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException es) {
+                    throw new RuntimeException(es);
+                } catch (IOException es) {
+                    throw new RuntimeException(es);
+                } catch (LineUnavailableException es) {
+                    throw new RuntimeException(es);
+                }
+            }
             bonus = rng.nextInt(5,13);
             System.out.println(ANSI_YELLOW + "\nYou also found " + bonus + " credits!" + ANSI_RESET);
             credits += bonus;

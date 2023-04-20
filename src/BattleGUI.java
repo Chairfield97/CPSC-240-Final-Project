@@ -301,7 +301,7 @@ class BattleGUI {
         tp.replaceSelection(msg);
 
     }
-    //where we move fight from battle in order to get passed a bug fix
+    //where we move fight from battle in order to get passed a bug fix added sounds when you win or die
     public boolean fight() {
 
 //        do {
