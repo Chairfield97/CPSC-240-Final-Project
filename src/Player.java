@@ -48,8 +48,8 @@ public class Player {
         int bonus = 0;
         int chance = rng.nextInt(1,4);
         if (chance != 1) {
-            bonus = rng.nextInt(10,26);
-            System.out.println(ANSI_YELLOW + "You also found " + bonus + " credits!" + ANSI_RESET);
+            bonus = rng.nextInt(5,21);
+            System.out.println(ANSI_YELLOW + "\nYou also found " + bonus + " credits!" + ANSI_RESET);
             credits += bonus;
         }
         return bonus;

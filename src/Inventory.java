@@ -156,15 +156,15 @@ public class Inventory {
         System.out.print(": ");
         int healChoice = scnr.nextInt();
         if (healSelection.size() == 0) {       //if no armor in player inventory
-            System.out.println("You have no healing items in your inventory.");
+            System.out.println("\nYou have no healing items in your inventory.");
             return 0;
         } else if (!(healChoice == healSelection.size() + 1)) {     //if player makes a valid selection
             Item healItem = healSelection.get(healChoice - 1);
-            System.out.println("You used the " + healItem.getName());
+            System.out.println("\nYou used the " + healItem.getName());
             inventory.remove(healItem);
             return healItem.getStrength();
         } else {                                //everything else
-            System.out.println("Use healing item cancelled.");
+            System.out.println("\nUse healing item cancelled.");
             return 0;
         }
     }

@@ -89,7 +89,7 @@ public class Merchant {
                     if (sale == null) {
                         System.out.println(ANSI_GREEN + "\"Maybe next time stranger\"\n" + ANSI_RESET);
                         selling = false;
-                    } else if (player.addCredits(sale.getValue()) > 0) {
+                    } else if (player.addCredits(sale.getValue()) > player.getCredits()) {
                         System.out.println(ANSI_GREEN + "\"Hehehehe, thank you.\"\n" + ANSI_RESET);
                         shopItems.add(sale);
                     } else {
@@ -106,6 +106,8 @@ public class Merchant {
     public void shelve() {
         for (Item i: shopItems) {
             ItemGenerator.restore(i);
+            //shopItems.remove(i);
         }
+        shopItems.clear();
     }
 }
