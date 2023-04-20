@@ -4,11 +4,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+//inherited from Enemy
 public class Grizzly extends Enemy {
     private String type = "Grandiose Grizzly";
     private int vitality = 50;
     private final int maxVitality = getVitality();
-
+    //Enemy randomized damage attacks player
     @Override
     public String attack(Player p, Random rng) {
         int damDealt = rng.nextInt(6,12);
@@ -19,7 +20,7 @@ public class Grizzly extends Enemy {
             return(p.getName() + " dodged the slice and dice!\n");
         }
     }
-
+    //Enemy randomized damage speacial attack player
     @Override
     public String specAttack(Player p, Random rng) {
         int damDealt = rng.nextInt(13,23);
@@ -30,7 +31,7 @@ public class Grizzly extends Enemy {
             return(p.getName() + " dodged Unbearable charge!\n");
         }
     }
-
+    //Enemy randomized dodge player attack
     @Override
     public boolean damage(int dam, Random rng) {
         if (rng.nextInt(0,4) != 1) {
@@ -40,16 +41,17 @@ public class Grizzly extends Enemy {
             return false;
         }
     }
-
+    //return type
     @Override
     public String getType() {
         return type;
     }
-
+    //return health
     @Override
     public int getVitality() {
         return vitality;
     }
+    //return max health
     public int getMaxVitality() {
         return maxVitality;
     }

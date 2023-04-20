@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+// Carry items
 public class Inventory {
     private ArrayList<Item> inventory = new ArrayList<>();
     private int carryLimit;
     private Item equippedWeapon = null;
     private Item equippedArmor = null;
     Scanner scnr = new Scanner(System.in);
-
+    // instuctor of the carrylimit and how much they can carry. Give us a random weapon and armor and the health potions.
     public Inventory (int carryLimit) {
 
         this.carryLimit = carryLimit;      //initializes carry limit
@@ -50,6 +50,7 @@ public class Inventory {
         }
         return newWeight;
     }
+    // return carrylimit
     public int getCarryLimit() {
         return this.carryLimit;
     }
@@ -139,7 +140,7 @@ public class Inventory {
             System.out.println("Equip armor cancelled.");
         }
     }
-
+    // Does a drop down menu and you select the inventory for your health that you want
     public int useHeal() {
         ArrayList<Item> healSelection = new ArrayList<>();
 
@@ -168,6 +169,7 @@ public class Inventory {
             return 0;
         }
     }
+    //ask if you want to add the Item that you won after defeating the monster
     public void sort (Item item) {
         String choice;
         Scanner input = new Scanner(System.in);
@@ -185,9 +187,11 @@ public class Inventory {
                 System.out.println("You discarded the " + item.getName());
         }
     }
+    //return equippedweapon
     public Item getEquippedWeapon() {
         return equippedWeapon;
     }
+    //return equippedarmor
     public Item getEquippedArmor() {
         return equippedArmor;
     }

@@ -1,3 +1,4 @@
+// Creates Item
 public class Item {
     private ItemType itemType;
     private String name;
@@ -12,25 +13,28 @@ public class Item {
         this.value = value;
         this.strength = strength;
     }
-
+    // gets name of Item
     public String getName() {
         return name;
     }
+    // gets Itemtype of the Item
     public ItemType getItemType() {     //returns item type
         return itemType;
     }
+    //gets weight of the Item
     public int getWeight() {        //returns item weight
         return weight;
     }
+    //gets value of the item
 
     public int getValue() {     //returns item value
         return value;
     }
+    //gets strength of the Item
 
     public int getStrength() {      //returns item strength
         return strength;
     }
-
     @Override
     public String toString() {      //returns string value of item properties
 

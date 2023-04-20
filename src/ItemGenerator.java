@@ -30,6 +30,7 @@ public class ItemGenerator {
             System.exit(0);
         }
     }
+    //adds Item
     public static void restore(Item item) {
         items.add(item);
     }
