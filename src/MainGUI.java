@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.Random;
 
 import static javax.swing.BorderFactory.createTitledBorder;
-
+// was to use the mainGui as the main menu
 public class MainGUI {
 
     private String userName;
@@ -26,17 +26,16 @@ public class MainGUI {
     private JTextField text;
 
     private Player p;
-
-
+    // instuctor to add how much health
     public MainGUI(String userName){
         this.userName = userName;
         health = 30;
     }
-
+    //to get username
     public String getUserName(){
         return userName;
     }
-
+    //instructor to get Item and carry limit and put that in a Gui
     public MainGUI(Player p) {
         this.p = p;
         ItemGenerator.itemSelection("Items.txt"); //passes import file to be imported
@@ -113,6 +112,7 @@ public class MainGUI {
 
         JButton printInv = new JButton("Print inventory");
         printInv.addActionListener(new ActionListener() {
+            //add a button to print inventory
             @Override
             public void actionPerformed(ActionEvent e) {
                 inventory.print();
@@ -121,6 +121,7 @@ public class MainGUI {
 
         JButton addItem = new JButton("Add random item");
         addItem.addActionListener(new ActionListener() {
+            //added a button to add a random Item
             @Override
             public void actionPerformed(ActionEvent e) {
                 inventory.add(ItemGenerator.generate());
@@ -129,6 +130,7 @@ public class MainGUI {
 
         JButton battle = new JButton("To battle!");
         battle.addActionListener(new ActionListener() {
+           //added a button to battle
             @Override
             public void actionPerformed(ActionEvent e) {
                 //new Battle(inventory, p, rng ,pw);
@@ -138,14 +140,17 @@ public class MainGUI {
 
         JButton dropItem = new JButton("Drop item");
         dropItem.addActionListener(new ActionListener() {
+            //added a button to drop Item
             @Override
             public void actionPerformed(ActionEvent e) {
                 inventory.drop();
             }
         });
 
+
         JButton equipW = new JButton("Equip weapon");
         equipW.addActionListener(new ActionListener() {
+            //added a button to equip weapon
             @Override
             public void actionPerformed(ActionEvent e) {
                 inventory.equipWeapon();
@@ -154,6 +159,7 @@ public class MainGUI {
 
         JButton equipA = new JButton("Equip armor");
         equipA.addActionListener(new ActionListener() {
+            //added a button to equip armor
             @Override
             public void actionPerformed(ActionEvent e) {
                 inventory.equipArmor();
@@ -162,6 +168,7 @@ public class MainGUI {
 
         JButton close = new JButton("Close");
         close.addActionListener(new ActionListener() {
+            //added a button to close
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();

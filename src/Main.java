@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
+//running project
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
@@ -13,7 +13,7 @@ public class Main {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_BLUE = "\u001B[34m";
-
+    // erases the file from the results.txt, comes up with the main menu, and uses switch to execute this menu
     public static void main(String[] args) {
 
         //attempt at bringing the MainGUI in again

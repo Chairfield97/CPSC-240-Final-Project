@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
+// to be able to buy items
 public class Merchant {
     private ArrayList<Item> shopItems = new ArrayList<>();
     Scanner select;
@@ -11,7 +11,7 @@ public class Merchant {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     private boolean leave;
-
+    //get up to 10 random Items and Herbs and open to a menu that you can select to buy if you have enough money
     public void greeting(Inventory inventory, Player player, Random rng) {
         int numItems = rng.nextInt(1, 10);
         for (int i = 0; i <= numItems; i++) {
@@ -103,6 +103,7 @@ public class Merchant {
         shelve();
         System.out.println(ANSI_GREEN + "\"Come back any time.\"\n" + ANSI_RESET);
     }
+    // Restore Items
     public void shelve() {
         for (Item i: shopItems) {
             ItemGenerator.restore(i);

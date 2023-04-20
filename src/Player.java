@@ -17,11 +17,13 @@ public class Player {
     private int credits;
     private static Player theInstance;
     private int specCooldown = 0;
+    //constructor to get name,health,and money
     private Player(String name) {
         Player.name = name;
         vitality = 50;
         credits = 10;
     }
+    // input your name
     public static synchronized Player instance() {
 //        Scanner nameInput = new Scanner(System.in);
         if (theInstance == null) {
@@ -30,13 +32,16 @@ public class Player {
         }
         return theInstance;
     }
+    //  return max health plus the armor strength
     public int getMaxVitality(Item armor) {
         return 50 + armor.getStrength();
     }
+    //return health and the armor strength
     public int addArmor(Item armor) {
         vitality = 50;
         return vitality += armor.getStrength();
     }
+    //returns your health at the start and after you go into battle
     public void heal(int health, Item armor) {
         if (vitality + health > 50 + armor.getStrength()) {
             addArmor(armor);
@@ -44,6 +49,7 @@ public class Player {
             vitality += health;
         }
     }
+    // you can get bonus credits depending on the randomizer and returns bonus
     public int bonusCredits(Random rng) {
         int bonus = 0;
         int chance = rng.nextInt(1,4);
@@ -54,19 +60,24 @@ public class Player {
         }
         return bonus;
     }
+    //returns money
     public int getCredits() {
         return credits;
     }
+    //return money and money added
     public int addCredits(int creds) {
        return credits += creds;
     }
+    //remove money
     public int removeCredits(int creds) {
         return credits -= creds;
     }
+    //return health
     public int getVitality() {
 
         return vitality;
     }
+    // if the player dodges the Enemy attack
     public boolean damage(int dam, Random rng) {
         if (rng.nextInt(0,3) == 1) {
             return false;
@@ -75,10 +86,11 @@ public class Player {
             return true;
         }
     }
+    //return the name
     public String getName() {
         return name;
     }
-
+    //return the damage dealt when you click the attack button
     public String attack(Enemy e, Item weapon, Random rng) {
         damDealt = weapon.getStrength() + rng.nextInt(0,5);
         specCooldown++;
@@ -91,6 +103,7 @@ public class Player {
             return("The " + e.getType() + " dodged your standard attack!\n");
         }
     }
+    //return the amount of damage that you dealt the enemy for special attack
     public String specAttack(Enemy e, Item weapon, Random rng) {
         damDealt = weapon.getStrength() + rng.nextInt(5,12);
         if (specCooldown >= 3) {
@@ -110,6 +123,7 @@ public class Player {
         }
 
     }
+    // to make sure you wait to click the special attack
     public int getSpecCooldown() {
         if (specCooldown <= 3) {
             return 3 - specCooldown;
