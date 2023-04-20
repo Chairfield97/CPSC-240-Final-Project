@@ -7,12 +7,12 @@ import java.util.Random;
 //inherited from Enemy
 public class Leshen extends Enemy {
     private String type = "Lush Leshen";
-    private int vitality = 45;
+    private int vitality = 50;
     private final int maxVitality = getVitality();
     //Enemy randomized damage attacks player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(10,17);
+        int damDealt = rng.nextInt(10,18);
         if (p.damage(damDealt, rng)) {
             return("Branch swipe hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Leshen extends Enemy {
     //Enemy randomized speacial attack damage player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(17,26);
+        int damDealt = rng.nextInt(18,32);
         if (p.damage(damDealt,rng)) {
             return("Root strangle hits!!! -" + damDealt + "\n");
         } else {
@@ -32,7 +32,7 @@ public class Leshen extends Enemy {
     // randomize if they dodge players attack
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,6) != 1) {
+        if (rng.nextInt(0,5) != 1) {
             vitality -= dam;
             return true;
         } else {

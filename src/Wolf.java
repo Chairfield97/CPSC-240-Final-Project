@@ -7,12 +7,12 @@ import java.util.Random;
 //inherited from enemy
 public class Wolf extends Enemy {
     private String type = "Ravenous Wolf";
-    private int vitality = 30;
+    private int vitality = 32;
     private final int maxVitality = getVitality();
     // // Enemy randomizer dealt damage attack for player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(4,9);
+        int damDealt = rng.nextInt(4,12);
         if (p.damage(damDealt, rng)) {
             return("Wolf bite hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Wolf extends Enemy {
     // Enemy randomizer dealt damage special attack for player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(10,16);
+        int damDealt = rng.nextInt(12,21);
         if (p.damage(damDealt,rng)) {
             return("Throat clamp hits!!! -" + damDealt + "\n");
         } else {

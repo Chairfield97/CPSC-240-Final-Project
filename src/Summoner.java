@@ -7,7 +7,7 @@ public class Summoner extends Enemy {
     // Enemy randomizer dealt damage attack for player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(6,12);
+        int damDealt = rng.nextInt(9,17);
         if (p.damage(damDealt, rng)) {
             return("Bipity boopity boo hits! -" + damDealt + "\n");
         } else {
@@ -27,7 +27,7 @@ public class Summoner extends Enemy {
     //Enemy randomizer to dodge player attacks
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) != 1) {
+        if (rng.nextInt(0,3) != 1) {
             vitality -= dam;
             return true;
         } else {

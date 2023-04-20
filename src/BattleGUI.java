@@ -110,7 +110,7 @@ class BattleGUI {
         enemylbl.setBounds(680,425,120,20);
         enemyVitlbl.setBounds(680,445,120,20);
 
-        // Input ALT+A or ALT+S
+        // Input ALT+A or ALT+S or CTRL+OPT+A CTRL+OPT+S
         btnAttack.setMnemonic(KeyEvent.VK_A);
         btnSpecAttack.setMnemonic(KeyEvent.VK_S);
 
@@ -256,7 +256,7 @@ class BattleGUI {
     }
     //says if they use special attacks or they dodge
     private boolean btnSpecClick(){
-        //System.setOut(promptOutput);
+//        System.setOut(promptOutput);
 //        StyleConstants.setForeground(promptStyle, Color.BLACK);
         String attack = player.specAttack(enemy, inventory.getEquippedWeapon(), rng);
         results(attack);
@@ -375,7 +375,7 @@ class BattleGUI {
         }
         return false;
     }
-    // where we to the file for the results of the battle
+    // where we write to the file for the results of the battle
     public void results(String result) {
         try {
             FileOutputStream fileCreate = new FileOutputStream("Results.txt", true);
@@ -386,7 +386,7 @@ class BattleGUI {
             System.out.println("Could not save the results");
         }
     }
-// returns conclude
+    // returns if the battles has concluded
     public boolean getConclusion() {
         return this.conclude;
     }

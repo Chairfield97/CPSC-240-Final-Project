@@ -7,12 +7,12 @@ import java.util.Random;
 //inherited from Enemy
 public class Grizzly extends Enemy {
     private String type = "Grandiose Grizzly";
-    private int vitality = 50;
+    private int vitality = 70;
     private final int maxVitality = getVitality();
     //Enemy randomized damage attacks player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(6,12);
+        int damDealt = rng.nextInt(12,21);
         if (p.damage(damDealt, rng)) {
             return("Paw slice and dice hits -" + damDealt + "\n");
             //System.out.print(RESET);
@@ -23,7 +23,7 @@ public class Grizzly extends Enemy {
     //Enemy randomized damage speacial attack player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(13,23);
+        int damDealt = rng.nextInt(21,36);
         if (p.damage(damDealt,rng)) {
             return("Unbearable charge hits!!! -" + damDealt + "\n");
             //System.out.print(RESET);
@@ -34,7 +34,7 @@ public class Grizzly extends Enemy {
     //Enemy randomized dodge player attack
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) != 1) {
+        if (rng.nextInt(0,5) != 1) {
             vitality -= dam;
             return true;
         } else {

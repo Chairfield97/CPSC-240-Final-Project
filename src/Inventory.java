@@ -36,10 +36,10 @@ public class Inventory {
 
         if ((item.getWeight() + totalWeight()) <= carryLimit) { //if player can carry
             inventory.add(item);
-            System.out.println("<The " + item + " was added to your inventory>");
+            System.out.println("\n<The " + item + " was added to your inventory>");
             return true;
         } else {    // if player cannot carry
-            System.out.println("<Picking up the " + item + " will exceed your carry limit of " + carryLimit + ">");
+            System.out.println("\n<Picking up the " + item + " will exceed your carry limit of " + carryLimit + ">");
             return false;
         }
     }

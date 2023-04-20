@@ -6,7 +6,7 @@ Rusty Sword
 Weapon
 Broadsword
 14
-15
+14
 16
 Weapon
 Pitchfork
@@ -16,8 +16,8 @@ Pitchfork
 Weapon
 Longbow
 8
-9
-12
+13
+15
 Weapon
 Iron Mace
 10
@@ -26,32 +26,32 @@ Iron Mace
 Weapon
 Adamant Javelin
 12
-15
+17
 20
 Weapon
 Battle Axe
 13
-7
+11
 14
 Weapon
 Serrated Sword
 6
-8
+10
 12
 Weapon
 War Hammer
 18
-12
+15
 17
 Weapon
 Spear
 6
-5
+6
 8
 Weapon
 Flail
 11
-9
+10
 13
 Weapon
 Short Sword
@@ -61,18 +61,18 @@ Short Sword
 Weapon
 Crossbow
 14
-10
+16
 17
 Weapon
 Crystal Halberd
 11
-7
+14
 15
 Weapon
 Dagger
 3
 5
-8
+7
 Armor
 Cloth Robes
 1

@@ -62,7 +62,7 @@ public class Main {
             System.out.println();
             switch (userSelection) {
                 case 1:
-                    Enemy enemy = eventList.enemySpawn(rng);
+                    Enemy enemy = eventList.enemySpawn(player, rng);
                     BattleGUI b = new BattleGUI (inventory, player, enemy, rng);
                     while(!conclusion) {
                         conclusion = b.getConclusion();

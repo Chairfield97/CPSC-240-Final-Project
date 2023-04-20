@@ -7,12 +7,12 @@ import java.util.Random;
 //inherited from enemy
 public class Inquisitor extends Enemy {
     private String type = "Impervious Inquisitor";
-    private int vitality = 50;
+    private int vitality = 80;
     private final int maxVitality = getVitality();
     //Enemy randomized damage on player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(10,17);
+        int damDealt = rng.nextInt(10,23);
         if (p.damage(damDealt, rng)) {
             return("Brute bludgeoning hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Inquisitor extends Enemy {
     //Enemy randomized special attack on player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(17,30);
+        int damDealt = rng.nextInt(23,39);
         if (p.damage(damDealt,rng)) {
             return("Dark magic spell hits!!! -" + damDealt + "\n");
         } else {
@@ -32,7 +32,7 @@ public class Inquisitor extends Enemy {
     //enemy randomized dodging player attacks
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,5) != 1) {
+        if (rng.nextInt(0,3) != 1) {
             vitality -= dam;
             return true;
         } else {

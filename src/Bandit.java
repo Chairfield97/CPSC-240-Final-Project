@@ -12,7 +12,7 @@ public class Bandit extends Enemy {
     //randomized the attack of bandit for attacks
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(4,9);
+        int damDealt = rng.nextInt(4,12);
         if (p.damage(damDealt, rng)) {
             return("Sword jab hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Bandit extends Enemy {
     // randomized the attack of special attacks
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(10,16);
+        int damDealt = rng.nextInt(12,20);
         if (p.damage(damDealt,rng)) {
             return("Shield bash hits!!! -" + damDealt + "\n");
         } else {
@@ -32,7 +32,7 @@ public class Bandit extends Enemy {
     // the chance they take damage
     @Override
     public boolean damage(int dam, Random rng) {
-        if (rng.nextInt(0,4) != 1) {
+        if (rng.nextInt(0,3) != 1) {
             vitality -= dam;
             return true;
         } else {

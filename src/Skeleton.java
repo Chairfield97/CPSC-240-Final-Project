@@ -7,12 +7,12 @@ import java.util.Random;
 //inherited from enemy
 public class Skeleton extends Enemy {
     private String type = "Skeletal Warrior";
-    private int vitality = 40;
+    private int vitality = 53;
     private final int maxVitality = getVitality();
     // Enemy randomizer dealt damage attack for player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(8,13);
+        int damDealt = rng.nextInt(8,17);
         if (p.damage(damDealt, rng)) {
             return("Sword slash hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Skeleton extends Enemy {
     // Enemy randomizer dealt damage special attack for player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(13,19);
+        int damDealt = rng.nextInt(17,28);
         if (p.damage(damDealt,rng)) {
             return("Elemental magic hits!!! -" + damDealt + "\n");
         } else {

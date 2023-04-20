@@ -13,7 +13,7 @@ public class Battle {
     BattleGUI b;
     //Battle Constuctor what it is supposed to print out
     public Battle(Inventory inventory, Player player, Random rng) {
-        this.enemy = eventList.enemySpawn(rng);
+        this.enemy = eventList.enemySpawn(player, rng);
         this.player= player;
         this.inventory = inventory;
         this.rng = rng;

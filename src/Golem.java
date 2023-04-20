@@ -1,36 +1,35 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-//inherited from Enemy
-public class Cyclops extends Enemy {
-    private String type = "Close-Minded Cyclops";
-    private int vitality=55;
+//inherited from enemy
+public class Golem extends Enemy {
+    private String type = "Mythical Golem";
+    private int vitality = 80;
     private final int maxVitality = getVitality();
-    // randomized enemy attack on player
+    //Enemy randomized damage on player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(11,19);
+        int damDealt = rng.nextInt(13,25);
         if (p.damage(damDealt, rng)) {
-            return("Clubbin time hit! -" + damDealt + "\n");
+            return("Stone strike hits! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged the Clubbin time!\n");
+            return(p.getName() + " dodged the stone strike!\n");
         }
     }
-    //randomized enemy special attack on player
+    //Enemy randomized special attack on player
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(19,27);
-        if (p.damage(damDealt, rng)) {
-            return("punch and kick hits!!! -" + damDealt + "\n");
+        int damDealt = rng.nextInt(19,38);
+        if (p.damage(damDealt,rng)) {
+            return("Boulder crush hits!!! -" + damDealt + "\n");
         } else {
-            return(p.getName() + " dodged punch and kick!\n");
+            return(p.getName() + " dodged the boulder crush!\n");
         }
     }
-    // if enemy is able to dodge
+    //enemy randomized dodging player attacks
     @Override
     public boolean damage(int dam, Random rng) {
         if (rng.nextInt(0,5) != 1) {

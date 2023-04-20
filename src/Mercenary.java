@@ -7,12 +7,12 @@ import java.util.Random;
 //inherits from Mercenary
 public class Mercenary extends Enemy {
     private String type = "Marksman Mercenary";
-    private int vitality = 30;
+    private int vitality = 37;
     private final int maxVitality = getVitality();
     //Enemy randomized damaged attacks on player
     @Override
     public String attack(Player p, Random rng) {
-        int damDealt = rng.nextInt(7,13);
+        int damDealt = rng.nextInt(7,19);
         if (p.damage(damDealt, rng)) {
             return("Arrow shot hits! -" + damDealt + "\n");
         } else {
@@ -22,7 +22,7 @@ public class Mercenary extends Enemy {
     //Enemy randomized damage special attacks on players
     @Override
     public String specAttack(Player p, Random rng) {
-        int damDealt = rng.nextInt(13,19);
+        int damDealt = rng.nextInt(19,27);
         if (p.damage(damDealt,rng)) {
             return("Crude explosive hits!!! -" + damDealt + "\n");
         } else {
