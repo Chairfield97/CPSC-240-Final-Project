@@ -350,6 +350,23 @@ class BattleGUI {
             appendToPane(prompt, message + "\n", Color.green);
             results(message + "\n");
             sleep();
+            String soundname="audio/yay-6326.wav";
+            AudioInputStream audioInputStream;
+
+            {
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundname).getAbsoluteFile());
+                    Clip clip=AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException es) {
+                    throw new RuntimeException(es);
+                } catch (IOException es) {
+                    throw new RuntimeException(es);
+                } catch (LineUnavailableException es) {
+                    throw new RuntimeException(es);
+                }
+            }
             JOptionPane.showMessageDialog(frame, message);
             this.conclude = true;
             WindowEvent closingEvent = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
