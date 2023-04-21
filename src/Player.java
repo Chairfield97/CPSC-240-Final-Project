@@ -85,7 +85,8 @@ public class Player {
     }
     //return money and money added
     public int addCredits(int creds) {
-       return credits += creds;
+       credits += creds;
+       return creds;
     }
     //remove money
     public int removeCredits(int creds) {

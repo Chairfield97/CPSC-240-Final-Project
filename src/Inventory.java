@@ -18,6 +18,8 @@ public class Inventory {
         inventory.add(new Item(ItemType.Healing, "Small Health Potion", 1, 5, 15));
         inventory.add(new Item(ItemType.Healing, "Medium Health Potion", 1, 5, 30));
         inventory.add(new Item(ItemType.Healing, "Large Health Potion", 1, 5, 50));
+        //inventory.add(new Item(ItemType.Miscellaneous, "Dirty Sack", 1, 0, 1));
+
 
         Item startingItem = ItemGenerator.generate();
 
