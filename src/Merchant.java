@@ -63,8 +63,8 @@ public class Merchant {
             if (choice.equalsIgnoreCase("B")) {
                 boolean buying = true;
                 do {
-                    System.out.println(ANSI_YELLOW + "Credits: " + player.getCredits() + ANSI_RESET);
-                    System.out.println(ANSI_GREEN + "\"What are ya buyin'?\"\n" + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "\nCredits: " + player.getCredits() + ANSI_RESET);
+                    System.out.println(ANSI_GREEN + "\n\"What are ya buyin'?\"" + ANSI_RESET);
                     audio("Buying");
                     System.out.printf("   %-28s %10s %9s %13s", "Item", "Weight", "Value", "Strength\n");
                     for (Item i : shopItems) {
@@ -76,7 +76,7 @@ public class Merchant {
                             System.out.printf("%d. %-28s%11s%10s%13s\n", indexNum, i, i.getWeight(), i.getValue(), i.getStrength());
                         }
                     }
-                    System.out.println(shopItems.size() + 1 + ". Cancel\n");
+                    System.out.println(shopItems.size() + 1 + ". Cancel");
                     System.out.print(": ");
                     int selection = select.nextInt() - 1;
                     if (shopItems.size() == 0) {
@@ -85,9 +85,10 @@ public class Merchant {
                         Item item = shopItems.get(selection);
                         if (player.getCredits() >= item.getValue()) {   //if player has enough credits
                             player.removeCredits(item.getValue());
-                            System.out.println(ANSI_GREEN + "\n\"Hehehehe, thank you.\"\n" + ANSI_RESET);
+                            System.out.println(ANSI_GREEN + "\n\"Hehehehe, thank you.\" " + ANSI_RED + "-" + item.getValue() + " credits" + ANSI_RESET);
+                            audio("cashier-quotka-chingquot-sound-effect-129698");
                             audio("Thank you");
-                            System.out.println("You purchased the " + shopItems.remove(selection) + "\n");
+                            System.out.println("You purchased the " + shopItems.remove(selection));
                             inventory.add(item);
                             sleep(2000);
                         } else {            // when player has insufficient funds
@@ -109,7 +110,7 @@ public class Merchant {
             } else if (choice.equalsIgnoreCase("S")) {
                 boolean selling = true;
                 do {
-                    System.out.println(ANSI_YELLOW + "Credits: " + player.getCredits() + "\n" + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "\nCredits: " + player.getCredits() + "\n" + ANSI_RESET);
                     System.out.println(ANSI_GREEN + "\"What are ya sellin'?\"" + ANSI_RESET);
                     audio("Selling");
                     Item sale = inventory.drop();
@@ -117,7 +118,8 @@ public class Merchant {
                         System.out.println(ANSI_GREEN + "\n\"Maybe next time stranger\"\n" + ANSI_RESET);
                         selling = false;
                     } else if (player.addCredits(sale.getValue()) > 0) {    // if item has some value
-                        System.out.println(ANSI_GREEN + "\n\"Hehehehe, thank you.\"\n" + ANSI_RESET);
+                        System.out.println(ANSI_GREEN + "\n\"Hehehehe, thank you.\" " + ANSI_YELLOW + "+" + sale.getValue() + " credits" + ANSI_RESET + "\n");
+                        audio("cashier-quotka-chingquot-sound-effect-129698");
                         audio("Thank you");
                         shopItems.add(sale);
                         sleep(2000);
@@ -132,7 +134,7 @@ public class Merchant {
             }
         }
         shelve();
-        System.out.println(ANSI_GREEN + "\n\"Come back any time.\"\n" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "\n\"Come back any time.\"" + ANSI_RESET);
         audio("comeback");
         sleep(1000);
     }

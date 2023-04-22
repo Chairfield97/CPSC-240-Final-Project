@@ -46,7 +46,7 @@ public class Main {
             System.out.println(ANSI_YELLOW + "Credits: " + player.getCredits());
             System.out.println(ANSI_RED + "Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
             System.out.println(ANSI_PURPLE + "Carry Capacity: " + inventory.totalWeight() + "/" + carryLimit);
-            System.out.println(ANSI_BLUE + " \nArmor:  " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon() + ANSI_RESET);
+            System.out.println(ANSI_BLUE + " \nArmor: " + inventory.getEquippedArmor() + "\n" + "Weapon: " + inventory.getEquippedWeapon() + ANSI_RESET);
             System.out.println("------------------------------");
             System.out.println("1. Battle");
             System.out.println("2. Print Inventory");
@@ -78,7 +78,7 @@ public class Main {
                     inventory.print();
                     break;
                 case 3:     //heal the player
-                    System.out.println("Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()));
+                    System.out.println(ANSI_RED + "Vitality: " + player.getVitality() + "/" + player.getMaxVitality(inventory.getEquippedArmor()) + ANSI_RESET);
                     player.heal(inventory.useHeal(), inventory.getEquippedArmor());
                     break;
                 case 4:
