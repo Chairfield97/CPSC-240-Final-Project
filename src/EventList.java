@@ -4,7 +4,7 @@ import java.util.*;
 // the multiple enemeies
 public class EventList {
 
-    private ArrayList <Enemy> enemies = new ArrayList<>(Arrays.asList(new Golem(), new Werewolf(), new Vampire(), new Inquisitor(), new Leshen(), new Griffin(), new Mercenary(), new Skeleton(), new Bandit(), new Wolf(), new Summoner(), new Grizzly(), new Boar(), new Cyclops()));
+    private ArrayList <Enemy> enemies = new ArrayList<>(Arrays.asList(new Succubus(), new Golem(), new Werewolf(), new Vampire(), new Inquisitor(), new Leshen(), new Griffin(), new Mercenary(), new Skeleton(), new Bandit(), new Wolf(), new Summoner(), new Grizzly(), new Boar(), new Cyclops()));
     private ArrayList<String> events = new ArrayList<>();
     private int progress;
    //pops up if you defeated all enemies good luck with that though
@@ -26,7 +26,7 @@ public class EventList {
         return enemies.size();
     }
     // load the scanner for events back in
-    public boolean load(Scanner filescan){
+    public boolean load(Scanner filescan) {
         //(filescan.next());
         return false;
     }

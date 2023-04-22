@@ -7,7 +7,7 @@ import java.util.Random;
 //inherited from Enemy
 public class Leshen extends Enemy {
     private String type = "Lush Leshen";
-    private int vitality = 50;
+    private int vitality = 55;
     private final int maxVitality = getVitality();
     //Enemy randomized damage attacks player
     @Override

@@ -8,7 +8,7 @@ import java.util.Random;
 //inherited from Enemy
 public class Cyclops extends Enemy {
     private String type = "Close-Minded Cyclops";
-    private int vitality=55;
+    private int vitality = 65;
     private final int maxVitality = getVitality();
     // randomized enemy attack on player
     @Override

@@ -1,3 +1,6 @@
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 // Carry items
@@ -7,9 +10,7 @@ public class Inventory {
     private Item equippedWeapon = null;
     private Item equippedArmor = null;
     Scanner scnr = new Scanner(System.in);
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
+    AudioInputStream audioInputStream;
     // instuctor of the carrylimit and how much they can carry. Give us a random weapon and armor and the health potions.
     public Inventory (int carryLimit) {
 
@@ -18,9 +19,9 @@ public class Inventory {
             System.out.println("You are feeling strong today!");
         }
 
-        inventory.add(new Item(ItemType.Healing, "Small Health Potion", 1, 6, 12));
-        inventory.add(new Item(ItemType.Healing, "Medium Health Potion", 1, 15, 30));
-        inventory.add(new Item(ItemType.Healing, "Large Health Potion", 1, 23, 50));
+        inventory.add(new Item(ItemType.Healing, "Small Health Potion", 1, 5, 15));
+        inventory.add(new Item(ItemType.Healing, "Medium Health Potion", 1, 5, 30));
+        inventory.add(new Item(ItemType.Healing, "Large Health Potion", 1, 5, 50));
         //inventory.add(new Item(ItemType.Miscellaneous, "Dirty Sack", 1, 0, 1));
 
 
@@ -88,6 +89,7 @@ public class Inventory {
         }
         else if ( 0 <= choice && choice < inventory.size()) {   //if player makes a valid selection
             System.out.println("You dropped the " + inventory.get(choice));
+            audio("weapondrop");
             return inventory.remove(choice);
         } else {                                                //everything else
             System.out.println("Drop cancelled");
@@ -149,7 +151,7 @@ public class Inventory {
     public int useHeal() {
         ArrayList<Item> healSelection = new ArrayList<>();
 
-        System.out.println("\nSelect a healing item\n");
+        System.out.println("\nSelect a healing item");
         System.out.printf("   %-28s %9s %9s %13s","Item","Weight","Value","Strength\n");
         for (Item i : inventory) {  //prints out all healing items in player inventory
             if (String.valueOf(i.getItemType()).equals("Healing")) {
@@ -166,8 +168,9 @@ public class Inventory {
             return 0;
         } else if (!(healChoice == healSelection.size() + 1)) {     //if player makes a valid selection
             Item healItem = healSelection.get(healChoice - 1);
-            System.out.println("\nYou used the " + healItem.getName() + ANSI_RED + " +" + healItem.getStrength() + " vitality" + ANSI_RESET);
+            System.out.println("\nYou used the " + healItem.getName());
             inventory.remove(healItem);
+            audio("medshot");
             return healItem.getStrength();
         } else {                                //everything else
             System.out.println("\nUse healing item cancelled.");
@@ -180,7 +183,7 @@ public class Inventory {
         Scanner input = new Scanner(System.in);
         do {
 
-            System.out.println("(Y)es to add " + item.getName() + " (Weight: " + item.getWeight() + " Value: " + item.getValue() + ") to your inventory or (N)o to discard");
+            System.out.println("(Y)es to add " + item.getName() + " Weight: " + item.getWeight() + " Value: " + item.getValue() + " to your inventory or (N)o to discard");
             choice = input.nextLine();
 
         } while (!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N"));
@@ -190,6 +193,20 @@ public class Inventory {
                 drop();
         } else if (choice.equalsIgnoreCase("N")) {
                 System.out.println("You discarded the " + item.getName());
+        }
+    }
+    public void audio(String fileName) {
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File("audio/" + fileName + ".wav").getAbsoluteFile());
+            Clip clip=AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException es) {
+            throw new RuntimeException(es);
+        } catch (IOException es) {
+            throw new RuntimeException(es);
+        } catch (LineUnavailableException es) {
+            throw new RuntimeException(es);
         }
     }
     //return equippedweapon

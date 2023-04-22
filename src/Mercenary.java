@@ -7,7 +7,7 @@ import java.util.Random;
 //inherits from Mercenary
 public class Mercenary extends Enemy {
     private String type = "Marksman Mercenary";
-    private int vitality = 37;
+    private int vitality = 45;
     private final int maxVitality = getVitality();
     //Enemy randomized damaged attacks on player
     @Override

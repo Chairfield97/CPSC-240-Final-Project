@@ -7,7 +7,7 @@ import java.util.Random;
 //inherited from enemy
 public class Vampire extends Enemy {
     private String type = "Vigorous Vampire";
-    private int vitality = 50;
+    private int vitality = 58;
     private final int maxVitality = getVitality();
     //Enemy randomized damage on player
     @Override

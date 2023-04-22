@@ -7,7 +7,7 @@ import java.util.Random;
 //inherited from enemy
 public class Inquisitor extends Enemy {
     private String type = "Impervious Inquisitor";
-    private int vitality = 80;
+    private int vitality = 90;
     private final int maxVitality = getVitality();
     //Enemy randomized damage on player
     @Override
